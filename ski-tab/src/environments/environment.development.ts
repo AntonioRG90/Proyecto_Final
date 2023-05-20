@@ -1,6 +1,9 @@
-export const environment = {};
+export const environment = {
+  production: false,
+};
 
 export const server = {
   production : false,
-  url: 'http://127.0.0.1:3600/skitab/',
+  // URL Local
+  url: 'http://127.0.0.1:8000/',
 }
