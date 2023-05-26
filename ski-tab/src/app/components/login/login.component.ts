@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user';
-import { LoginService } from 'src/app/services/login/login.service';
+import { FormGroup, FormControl, Validators} from '@angular/forms';
+
+import { AuthService } from 'src/app/services/auth/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -10,20 +12,25 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class LoginComponent {
 
-   users: User[] = []; 
-
   constructor(
-    private service:LoginService,
     private router:Router,
-  ) {
+    public authService: AuthService,
+  ) { }
+
+  ngOnInit() {
 
   }
 
-  ngOnInit() {
-   this.service.getAllUsers().subscribe(users =>{
-    this.users = users;
-    console.log(this.users);
-   })
+  loginForm = new FormGroup({
+    userEmail: new FormControl('', [Validators.required, Validators.email]),
+    userPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+  })
+
+  submitForm(){
+    if(this.loginForm.invalid){
+      return;
+    }
+  
   }
 
   
