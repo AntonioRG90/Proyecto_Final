@@ -1,8 +1,10 @@
 <div class="login">
   <header>
-  <img src="./../../../assets/images/skitab.png" alt="">
-  </header>  
-  <button type="submit" (click)="authService.glogin()">LOGIN CON GOOGLE</button> 
+    <img src="./../../../assets/images/skitab.png" alt="">
+  </header>
+  <div class="button-panel">
+    <button class="login-button" type="submit" (click)="authService.glogin()">Login</button> 
+    <button class="register-button" type="submit" (click)="authService.gregister()">Register</button> 
+    <button class="contact-us-button"><a href="mailto:skitab.soft@gmail.com">Contact Us</a></button>
+  </div>
 </div>
-<!-- poner cuando el usuario no esté activo -->
-<!-- <p>For registration or problems <a href="mailto:skitab.soft@gmail.com">Contact Us</a></p> -->

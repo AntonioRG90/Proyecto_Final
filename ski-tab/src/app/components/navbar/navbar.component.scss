@@ -1,0 +1,24 @@
+@import './../../../assets/scss/variables.scss';
+.navbar{
+  @apply flex justify-around items-center h-16;
+  background-color: $button-bg-color;
+  color: $secondary-text-color;
+  .logo{
+    @apply h-fit;
+    a{
+      @apply text-4xl font-bold py-2 px-5;
+      &:hover{
+        color: $button-hover-color;
+      }
+    }
+  }
+  .menu{
+    @apply flex justify-between w-16;
+    li{
+      @apply p-2 cursor-pointer;
+      &:hover{
+        color: $button-hover-color;
+      }
+    }
+  }
+}

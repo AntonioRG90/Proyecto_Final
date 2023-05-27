@@ -1,74 +1,36 @@
+@import './../../../assets/scss/variables.scss';
+
 :host{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  
-}
-.login {
-  @apply w-fit m-auto;
-  background-color: #dddfe9;
-  border: solid 1px black;
-  border-radius: 5px;
-  max-width: 300px;
-  padding: 20px;
-}
-header {
-  @apply m-auto w-52;
+  @apply fixed left-0 right-0 top-1/4;
 }
 
-form {
-  @apply flex flex-col items-center;
-  input, button{
-    border-radius: 5px;
-    width: 100%;
+.login {
+  @apply w-fit m-auto border-solid border-2 rounded p-5 w-fit shadow-2xl;
+  background-color: $secondary-bg-color;
+  border-color: black;
+
+  header {
+    @apply m-auto w-64;
   }
-  input{
-    height: 30px;
-    margin-top: 10px;
-    text-align: center;
-    &:focus{
-      outline: none;
-    }
-    &::placeholder{
-      text-align: center;
+
+  .button-panel{
+    @apply flex flex-col justify-center self-center w-max mx-auto;
+
+    button {
+      @apply border-none rounded w-52 shadow-lg my-2 h-9;
+      background-color: $button-bg-color;
+      color: $secondary-text-color;
+      font-family: $titles-font;
+      &:hover{
+        color: $button-hover-color;
+      }
     }
     
-  }
-
-  button {
-    background-color: #4060FF;
-    border: solid 1px black;
-    color: white;
-    letter-spacing: 3px;
-    height: 40px;
-    margin: 10px 0;
-    padding: 10px;
-    font-weight: bold;
-    box-shadow: inset 0px 0px 3px black;
-  
+    .register-button{
+      background-image: url("./../../../assets/images/google-symbol.png");
+      background-size:15%;
+      background-repeat: no-repeat;
+      background-position: 80%;
+    }
   }
 }
-
-p {
-  @apply m-auto w-4/5;
-  a{
-    color: #4060FF;
-    text-decoration: underline;
-  }
-}
-
-input.ng-invalid.ng-touched{
-  border: solid 1px rgb(194, 1, 1);
-  background-image: url('data:image/svg+xml;utf-8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>close</title><path fill="rgb(194, 1, 1)" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>');
-  background-repeat: no-repeat;
-  background-position:right;
-}
-
-input.ng-valid.ng-touched{
-  border: solid 1px green;
-  background-image: url('data:image/svg+xml;utf-8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>check</title><path fill="rgb(0, 128, 0)" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" /></svg>');
-  background-repeat: no-repeat;
-  background-position:right;
-}
-

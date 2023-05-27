@@ -1,6 +1,9 @@
-<div>
-  <ul>
-    <li><mat-icon [routerLink]="['/settings']" >settings</mat-icon></li>
+<div class="navbar">
+  <div class="logo">
+    <a [routerLink]="['/home']">SkiTab</a>
+  </div>
+  <ul class="menu">
+    <li><mat-icon [routerLink]="['/settings/competitions']" >settings</mat-icon></li>
     <li><mat-icon (click)="authService.logout()">exit_to_app</mat-icon></li>
   </ul>
 </div>

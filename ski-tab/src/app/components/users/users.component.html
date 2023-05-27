@@ -1,5 +1,10 @@
-<div *ngFor="let user of users">
-  <p>User: {{ user.email }} </p>
-  <p>Active: {{ user.isActive }} </p>
-  <p>Rol: {{ user.role }} </p>
+<div class="main">
+  <div *ngFor="let user of users" class="users">
+    <p>{{ user.email }} </p>
+    <div class="panelButton">
+      <button (click)="changeStatus(user.key, user.isActive)" [ngClass]="user.isActive? 'active-user' : 'inactive-user'">{{ user.isActive | isActive}}<mat-icon>loop</mat-icon></button>
+      <button (click)="changeRole(user.key, user.role)" [ngClass]="user.role? 'admin-user' : ''">{{ user.role | role }}<mat-icon>loop</mat-icon></button>
+      <button (click)="removeUser(user.key)" ><mat-icon>delete</mat-icon></button>
+    </div>
+  </div>
 </div>

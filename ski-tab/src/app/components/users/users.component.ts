@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { UsersService } from 'src/app/services/users/users.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -11,6 +11,7 @@ import { UsersService } from 'src/app/services/users/users.service';
 export class UsersComponent {
   constructor(
     private usersService: UsersService,
+    private authService: AuthService
   ){}
 
   users: any[] = [];
@@ -22,9 +23,21 @@ export class UsersComponent {
         const user: any = u.payload.val();
         user.key = u.key;
         this.users.push(user);
-        console.log(this.users);
       })
     })
+  }
+
+  changeStatus(userUid:any, userStatus:boolean){
+    this.usersService.changeStatus(userUid, userStatus);
+  }
+
+  changeRole(userUid:any, userRole:boolean){
+    this.usersService.changeRole(userUid, userRole);
+  }
+
+  removeUser(userUid:any){
+    this.authService.gdelete(userUid);
+    this.usersService.removeUser(userUid);
   }
 
 }

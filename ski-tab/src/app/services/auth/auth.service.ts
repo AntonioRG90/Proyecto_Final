@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider} from 'firebase/auth';
 import { Router } from '@angular/router';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-
+import { UsersService } from '../users/users.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CustomSnackbarComponent } from 'src/app/components/custom-snackbar/custom-snackbar.component';
 import { map } from 'rxjs';
+import { MessengerService } from '../messenger/messenger.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,10 @@ export class AuthService {
     public afAuth: AngularFireAuth,
     public router: Router,
     private db: AngularFireDatabase,
-    
+    private usersService: UsersService,
+    private snackBar: MatSnackBar,
+    private messengerService: MessengerService,
+
   ) { }
 
   user = this.afAuth.authState.pipe( map( authState =>{
@@ -28,38 +34,51 @@ export class AuthService {
     
   } ))
 
+  gregister(){
+    this.afAuth.signInWithPopup(new GoogleAuthProvider())
+    .then( user => {
+      if (user.additionalUserInfo!.isNewUser){
+        this.usersService.insertUserData(user.user);
+        this.router.navigate(['/login']);
+        this.messengerService.showNotification('Your account was registered but you need access! Contact Us',10000);
+      }else{
+        this.messengerService.showNotification('Your account is already registered!',5000);
+      }  
+    })
+    .catch( error => {
+      this.messengerService.showNotification('Error while login!',3000);
+    })
+  }
   glogin(){
     this.afAuth.signInWithPopup(new GoogleAuthProvider())
     .then( user => {
-      console.log('login user:', user);
-      if (user.additionalUserInfo!.isNewUser){
-        this.insertUserData(user.user);
-      }
-      
-      this.router.navigate(['/home']);
+      this.usersService.getUser(user.user?.uid).subscribe( snap =>{
+        this.usersService.snapIntoUser(snap);
+        const userObject = this.usersService.snapIntoUser(snap);
+        if (userObject.getIsActive()){
+          this.router.navigate(['/home']);
+          this.messengerService.showNotification('Login was successful!',3000);
+        }else{
+          this.messengerService.showNotification('Account disabled! Contact Us',10000);
+          this.afAuth.signOut();
+          this.router.navigate(['/login']);
+        }
+      })
     })
     .catch( error => {
-      console.log('login error:', error);
+      this.messengerService.showNotification('Error while login!',3000);
     })
   }
 
+  gdelete(userUid:any){
+    
+  }
+
+
+
   logout(){
-    console.log('logout');
+    this.messengerService.showNotification('Logged out!',3000);
     this.afAuth.signOut();
     this.router.navigate(['/login']);
   }
-
-  insertUserData(user: any){
-    console.log('user', user);
-    const path = 'users/'+user.uid;
-    const userToInsert = {
-      email: user.email,
-      isActive: false,
-      role: false,
-    }
-
-    this.db.object(path).set(userToInsert)
-    .catch(error => console.log(error));
-  }
-
 }

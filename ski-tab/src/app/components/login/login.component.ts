@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
-
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 
@@ -21,17 +19,6 @@ export class LoginComponent {
 
   }
 
-  loginForm = new FormGroup({
-    userEmail: new FormControl('', [Validators.required, Validators.email]),
-    userPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
-  })
-
-  submitForm(){
-    if(this.loginForm.invalid){
-      return;
-    }
-  
-  }
 
   
 } 

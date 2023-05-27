@@ -1,0 +1,14 @@
+@import './../../../assets/scss/variables.scss';
+.settings-menu{
+  @apply h-14 flex justify-center items-center;
+  background-color: $secondary-bg-color;
+  button{
+    @apply p-2 mx-3 border-none rounded;
+    background-color: $button-bg-color;
+    color: $secondary-text-color;
+    font-family: $titles-font;
+    &:hover{
+      color: $button-hover-color;
+    }
+  }
+}

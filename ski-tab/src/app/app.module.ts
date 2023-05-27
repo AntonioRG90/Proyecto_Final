@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './components/home/home.component';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -21,6 +22,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { SettingsComponent } from './components/settings/settings.component';
 import { UsersComponent } from './components/users/users.component';
 import { SettingsCompetitionsComponent } from './components/settings-competitions/settings-competitions.component';
+import { CustomSnackbarComponent } from './components/custom-snackbar/custom-snackbar.component';
+import { IsActivePipe } from './pipes/isActive/is-active.pipe';
+import { RolePipe } from './pipes/role/role.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,10 @@ import { SettingsCompetitionsComponent } from './components/settings-competition
     NavbarComponent,
     SettingsComponent,
     UsersComponent,
-    SettingsCompetitionsComponent
+    SettingsCompetitionsComponent,
+    CustomSnackbarComponent,
+    IsActivePipe,
+    RolePipe
   ],
   imports: [
     BrowserModule,
@@ -43,10 +50,11 @@ import { SettingsCompetitionsComponent } from './components/settings-competition
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    MatSnackBarModule,
   ],
   providers: [
     CookieService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

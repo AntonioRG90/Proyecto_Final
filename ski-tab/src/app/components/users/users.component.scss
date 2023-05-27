@@ -1,0 +1,30 @@
+@import './../../../assets/scss/variables.scss';
+.main{
+  @apply w-fit m-auto;
+}
+.users{
+  @apply flex justify-end items-center my-2 h-11 px-6;
+  background-color: $secondary-bg-color;
+  .panelButton{
+    @apply ml-4 flex justify-center items-center;
+    button{
+      @apply inline-flex justify-center items-center w-24 mx-2 py-2 border-2 rounded-md;
+      border-color: $primary-text-color;
+      font-family: $titles-font;
+      &:hover{
+        box-shadow: inset 0 0 0 10em rgba(255, 255, 255, 0.5);
+      }
+    }
+    
+  }
+
+  .active-user{
+    background-color: rgba(0, 128, 0, 0.3);
+  }
+  .inactive-user{
+    background-color: rgba(255, 0, 0, 0.3);
+  }
+  .admin-user{
+    background-color: rgba(0, 0, 255, 0.3);
+  }
+}
