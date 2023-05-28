@@ -3,7 +3,7 @@
   @apply w-fit m-auto;
 }
 .users{
-  @apply flex justify-end items-center my-2 h-11 px-6;
+  @apply flex justify-end items-center my-3 h-11 px-6 rounded-2xl shadow-lg;
   background-color: $secondary-bg-color;
   .panelButton{
     @apply ml-4 flex justify-center items-center;

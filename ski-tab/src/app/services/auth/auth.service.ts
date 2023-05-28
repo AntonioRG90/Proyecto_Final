@@ -5,9 +5,10 @@ import { Router } from '@angular/router';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { UsersService } from '../users/users.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CustomSnackbarComponent } from 'src/app/components/custom-snackbar/custom-snackbar.component';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { MessengerService } from '../messenger/messenger.service';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,18 +22,19 @@ export class AuthService {
     private usersService: UsersService,
     private snackBar: MatSnackBar,
     private messengerService: MessengerService,
+    private http: HttpClient
 
   ) { }
 
-  user = this.afAuth.authState.pipe( map( authState =>{
-    console.log('authState: ', authState);
-    if (authState){
-      return authState;
-    }else{
-      return null;
-    }
+  // user = this.afAuth.authState.pipe( map( authState =>{
+  //   console.log('authState: ', authState);
+  //   if (authState){
+  //     return authState;
+  //   }else{
+  //     return null;
+  //   }
     
-  } ))
+  // } ))
 
   gregister(){
     this.afAuth.signInWithPopup(new GoogleAuthProvider())
@@ -49,6 +51,7 @@ export class AuthService {
       this.messengerService.showNotification('Error while login!',3000);
     })
   }
+  
   glogin(){
     this.afAuth.signInWithPopup(new GoogleAuthProvider())
     .then( user => {
@@ -70,11 +73,15 @@ export class AuthService {
     })
   }
 
-  gdelete(userUid:any){
-    
+  gdelete(userEmail:any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+          'Content-Type': 'application/json', 
+          'Access-Control-Allow-Origin': '*'
+      })
+    };
+    return this.http.post('https://us-central1-skitab-57521.cloudfunctions.net/deleteUser', {body: userEmail}, httpOptions);
   }
-
-
 
   logout(){
     this.messengerService.showNotification('Logged out!',3000);

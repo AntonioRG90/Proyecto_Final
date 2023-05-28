@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -14,9 +13,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth/';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-
 import { CookieService } from 'ngx-cookie-service';
-
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -25,6 +22,9 @@ import { SettingsCompetitionsComponent } from './components/settings-competition
 import { CustomSnackbarComponent } from './components/custom-snackbar/custom-snackbar.component';
 import { IsActivePipe } from './pipes/isActive/is-active.pipe';
 import { RolePipe } from './pipes/role/role.pipe';
+import { AsideNavbarComponent } from './components/aside-navbar/aside-navbar.component';
+import { CreateCompetitionComponent } from './components/create-competition/create-competition.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,9 @@ import { RolePipe } from './pipes/role/role.pipe';
     SettingsCompetitionsComponent,
     CustomSnackbarComponent,
     IsActivePipe,
-    RolePipe
+    RolePipe,
+    AsideNavbarComponent,
+    CreateCompetitionComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,7 @@ import { RolePipe } from './pipes/role/role.pipe';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     MatSnackBarModule,
+    // MatDialog,
   ],
   providers: [
     CookieService,

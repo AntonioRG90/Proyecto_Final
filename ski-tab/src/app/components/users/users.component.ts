@@ -35,9 +35,10 @@ export class UsersComponent {
     this.usersService.changeRole(userUid, userRole);
   }
 
-  removeUser(userUid:any){
-    this.authService.gdelete(userUid);
-    this.usersService.removeUser(userUid);
+  removeUser(userUid:any, userEmail:any){
+    userEmail = {'userEmail': userEmail};
+    this.authService.gdelete(userEmail).subscribe();
+    // this.usersService.removeUser(userUid);
   }
 
 }
