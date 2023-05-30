@@ -1,6 +1,6 @@
 @import './../../../assets/scss/variables.scss';
 .navbar{
-  @apply flex justify-around items-center h-16;
+  @apply flex justify-around items-center h-16 shadow-2xl;
   background-color: $button-bg-color;
   color: $secondary-text-color;
   .logo{

@@ -1,0 +1,39 @@
+@import './../../../assets/scss/variables.scss';
+
+.main{
+  @apply w-fit m-auto;
+}
+
+.competitions{
+  @apply flex justify-end items-center my-3 h-11 px-6 rounded-2xl shadow-lg;
+  background-color: $secondary-bg-color;
+  
+  .panelTag{
+    @apply flex justify-center items-center;
+    p{
+      @apply mx-3;
+    }
+  }
+
+  .panelButton{
+    @apply ml-4 flex justify-center items-center;
+
+    button{
+      @apply inline-flex justify-center items-center w-24 mx-2 py-2 border-2 rounded-md;
+      border-color: $primary-text-color;
+      
+      &:hover{
+        box-shadow: inset 0 0 0 10em rgba(255, 255, 255, 0.5);
+      }
+    }
+    
+  }
+}
+
+.active-competition{
+  background-color: rgba(0, 128, 0, 0.3);
+}
+
+.inactive-competition{
+  background-color: rgba(255, 0, 0, 0.3);
+}

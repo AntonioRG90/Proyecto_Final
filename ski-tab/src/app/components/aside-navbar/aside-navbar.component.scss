@@ -1,0 +1,46 @@
+@import './../../../assets/scss/variables.scss';
+.aside-panel{
+  @apply float-left w-52 h-screen font-extrabold text-lg shadow-2xl;
+  background-color: $secondary-bg-color;
+  border: solid 2px $button-bg-color;
+  border-top: none;
+  font-family: $titles-font;
+  .competitions-panel{
+    @apply my-5 mx-5;
+    .competitions{
+      @apply text-left mb-4;
+      .panel-buttons{
+        @apply flex items-center justify-between my-1;
+        border-bottom: solid 2px $primary-bg-color;
+        &:hover{
+          border-color: $button-bg-color;
+        }
+        button{
+          @apply p-1;
+        }
+        .tag-button{
+          @apply ml-1 text-left;
+        }
+        .edit-button{
+          @apply border-2 rounded-md ml-2 h-9;
+          border-color: $button-bg-color;
+          &:hover{
+            box-shadow: inset 0 0 0 10em rgba(255, 255, 255, 0.5);
+          }
+        }
+      }
+      .categories{
+        @apply ml-4 border-l-2 rounded-sm;
+        border-color: $button-bg-color;
+      }
+    }
+  }
+  .create-button{
+    @apply border-2 rounded-md  p-2;
+    border-color: $button-bg-color;
+    &:hover{
+      box-shadow: inset 0 0 0 10em rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+

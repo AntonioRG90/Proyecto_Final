@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-settings',
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent {
+
+  user:any = {};
+
+  constructor(
+    private usersService: UsersService,
+  ){}
+
+ ngOnInit(){
+  this.usersService.tokenIntoUser().subscribe( user => {
+    this.user = user;
+  });
+ }
 
 }

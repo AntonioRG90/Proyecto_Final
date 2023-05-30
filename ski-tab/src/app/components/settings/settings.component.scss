@@ -1,6 +1,6 @@
 @import './../../../assets/scss/variables.scss';
 .settings-menu{
-  @apply h-14 flex justify-center items-center;
+  @apply h-14 flex justify-center items-center shadow-lg;
   background-color: $secondary-bg-color;
   button{
     @apply p-2 mx-3 border-none rounded;

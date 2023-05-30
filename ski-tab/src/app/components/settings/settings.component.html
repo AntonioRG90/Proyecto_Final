@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="settings-menu">
-  <button [routerLink]="['users']">Users</button>
+  <button [routerLink]="['users']" *ngIf="user.role">Users</button> 
   <button [routerLink]="['competitions']">Competitions</button>
 </div>
 <router-outlet></router-outlet>

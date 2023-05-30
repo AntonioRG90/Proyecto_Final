@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { User } from 'src/app/classes/user.class';
+import { User } from 'src/app/models/user';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { CookieService } from 'ngx-cookie-service';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +14,8 @@ export class UsersService {
 
   constructor(
     private db: AngularFireDatabase,
-
+    private jwt: JwtHelperService,
+    private cookieService: CookieService,
 
   ) { }
 
@@ -43,23 +47,35 @@ export class UsersService {
   }
 
   snapIntoUser(snap: any){
-    return new User(
-      snap[0].payload.val(),
-      snap[1].payload.val(),
-      snap[2].payload.val(),
+    const user:User ={
+      email: snap[0].payload.val(),
+      isActive: snap[1].payload.val(),
+      role: snap[2].payload.val(),
+      uid: snap[3].payload.val(),
+    };
+    return user;
+  }
+
+  tokenIntoUser(){
+    let userToken = this.cookieService.get('accessToken');
+    let user = this.jwt.decodeToken(userToken);
+    return this.getUser(user.user_id).pipe(
+      map(snap => {
+        return this.snapIntoUser(snap); 
+      })
     )
   }
 
   insertUserData(user: any){
     const path = 'users/'+user.uid;
-    const userToInsert = new User(
-      user.email,
-      false,
-      false,
-    )
+    const userToInsert:User = {
+      uid: user.uid,
+      email: user.email,
+      isActive: false,
+      role: false,
+    };
     this.db.object(path).set(userToInsert)
     .catch(error => console.log(error));
   }
-
 
 }

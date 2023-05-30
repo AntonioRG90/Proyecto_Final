@@ -1,0 +1,34 @@
+@import './../../../assets/scss/variables.scss';
+
+button{
+  background-color: $button-bg-color;
+  color: $button-text-color;
+  font-family: $titles-font;
+  &:hover{
+    color: $button-hover-color;
+  }
+}
+.close-icon{
+  @apply border-2 rounded-full h-7 sticky;
+  left: 325px;
+}
+
+.create-competition{
+  @apply flex flex-col justify-center w-80 mx-auto;
+
+  button{
+    @apply p-3 m-2 rounded-md;
+  }
+
+  .panel-button{
+    button{
+      @apply px-4;
+    }
+  }
+
+  .finish-button{
+    @apply w-52 mx-auto;
+  }
+}
+
+

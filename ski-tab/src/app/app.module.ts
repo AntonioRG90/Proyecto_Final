@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -24,7 +24,13 @@ import { IsActivePipe } from './pipes/isActive/is-active.pipe';
 import { RolePipe } from './pipes/role/role.pipe';
 import { AsideNavbarComponent } from './components/aside-navbar/aside-navbar.component';
 import { CreateCompetitionComponent } from './components/create-competition/create-competition.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MAT_DATE_LOCALE, DateAdapter, MatNativeDateModule  } from '@angular/material/core';
+import { CustomDateAdapter } from './others/custom-date-adapter';
+import { FormatDatePipe } from './pipes/format-date/format-date.pipe';
 
 @NgModule({
   declarations: [
@@ -40,12 +46,14 @@ import { MatDialog } from '@angular/material/dialog';
     RolePipe,
     AsideNavbarComponent,
     CreateCompetitionComponent,
+    FormatDatePipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatInputModule,
     MatIconModule,
@@ -53,10 +61,19 @@ import { MatDialog } from '@angular/material/dialog';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     MatSnackBarModule,
-    // MatDialog,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
   ],
   providers: [
     CookieService,
+    JwtHelperService,
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false} },
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: JWT_OPTIONS, useValue: {} },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    { provide: DateAdapter, useClass: CustomDateAdapter },
   ],
   bootstrap: [AppComponent],
 })

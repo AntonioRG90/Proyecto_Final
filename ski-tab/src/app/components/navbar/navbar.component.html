@@ -1,9 +1,9 @@
 <div class="navbar">
   <div class="logo">
-    <a [routerLink]="['/home']">SkiTab</a>
+    <a [routerLink]="['/home']" title="Go to home">SkiTab</a>
   </div>
   <ul class="menu">
-    <li><mat-icon [routerLink]="['/settings/competitions']" >settings</mat-icon></li>
-    <li><mat-icon (click)="authService.logout()">exit_to_app</mat-icon></li>
+    <li><mat-icon [routerLink]="['/settings/competitions']" title="Settings" >settings</mat-icon></li>
+    <li><mat-icon (click)="authService.logout()" title="Logout">exit_to_app</mat-icon></li>
   </ul>
 </div>

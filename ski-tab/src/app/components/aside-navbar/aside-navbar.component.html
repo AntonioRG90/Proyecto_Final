@@ -1,14 +1,20 @@
-<div>
-  <ul>
-    <li class="competitions">
-      <button (click)=" openCreateCompetition()">Competition 1</button>
-      <button><mat-icon>edit</mat-icon></button>
-      <ul>
-        <li class="categories">
-          <button>Category 1</button>
-          <button><mat-icon>edit</mat-icon></button>
+<div class="aside-panel">
+  <ul class="competitions-panel">
+    <li class="competitions" *ngFor="let competition of competitionsFiltered[0]">
+      <div class="panel-buttons">
+        <button class="tag-button w-28" (click)="showHide(competition.id)" title="Open / Close">{{competition.tag}}</button>
+        <button (click)="openCreateCompetition(competition)" class="edit-button" title="Edit Competition"><mat-icon>edit</mat-icon></button>
+      </div>
+      <ul class="categories" [hidden]="!hideCategory[competition.id]">
+        <li>
+          <div class="panel-buttons">
+            <button class="tag-button w-24">Jun W</button>
+            <button class="edit-button" title="Edit Category"><mat-icon>edit</mat-icon></button>
+          </div>
         </li>
       </ul>
-    </li>
+      <button *ngIf="competitions.length > 0" [hidden]="!hideCategory[competition.id]" class="create-button my-4" title="Create category">Create Category</button>
+    </li>  
   </ul>
+  <button class="create-button" (click)="openCreateCompetition(emptyData)" title="Create Competition">Create Competition</button>
 </div>

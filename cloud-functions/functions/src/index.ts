@@ -33,27 +33,31 @@ const firebaseConfig = {
   appId: "1:950595570395:web:b2bd7990c9e72e73471afe",
   measurementId: "G-BND4XB76ZG"
 };
+
 const admin = require("firebase-admin");
 admin.initializeApp(firebaseConfig);
 
+const cors = require("cors")({origin:true});
 
 export const deleteUser = functions.https.onRequest(async (request, response) => {
-  const userEmail = request.body.userEmail;
-  await admin.auth().getUserByEmail(userEmail)
-    .then(function (userRecord:any) {
-      const uid = userRecord.uid;
-      admin.auth().deleteUser(uid)
-        .then( () => {
-          console.log('User deleted');
-          response.status(200).send('User deleted');
-        })
-        .catch(() => {
-          console.log('Error deleting user');
-          response.status(500).send('Failed to delete user');
-        });
-    })
-    .catch(() => {
-      console.log('Error fetching user');
-      response.status(500).send('Failed while fetching user');
-    })
-})
+  cors(request, response, () => {
+    const userEmail = request.body.userEmail;
+    admin.auth().getUserByEmail(userEmail)
+      .then(function (userRecord:any) {
+        const uid = userRecord.uid;
+        admin.auth().deleteUser(uid)
+          .then( () => {
+            console.log('User deleted');
+            response.status(200).send('User deleted');
+          })
+          .catch(() => {
+            console.log('Error deleting user');
+            response.status(500).send('Failed to delete user');
+          });
+      })
+      .catch(() => {
+        console.log('Error fetching user');
+        response.status(500).send('Failed while fetching user');
+      })
+  })
+});

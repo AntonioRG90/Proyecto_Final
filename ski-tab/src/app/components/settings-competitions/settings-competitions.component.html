@@ -1,1 +1,12 @@
-<p>settings-competitions works!</p>
+<div class="main">
+  <div *ngFor="let competition of competitions" class="competitions">
+    <div class="panelTag">
+      <p>{{ competition.tag }} </p>
+      <p>{{ competition.date | date:'dd/MM/yyyy' }} </p>
+    </div>
+    <div class="panelButton">
+      <button (click)="changeStatus(competition.id, competition.status)" [ngClass]="competition.status? 'active-competition' : 'inactive-competition'">{{ competition.status | isActive}}<mat-icon>loop</mat-icon></button>
+      <button (click)="deleteCompetition(competition.id)" ><mat-icon>delete</mat-icon></button>
+    </div>
+  </div>
+</div>

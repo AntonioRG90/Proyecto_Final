@@ -38,7 +38,7 @@ export class UsersComponent {
   removeUser(userUid:any, userEmail:any){
     userEmail = {'userEmail': userEmail};
     this.authService.gdelete(userEmail).subscribe();
-    // this.usersService.removeUser(userUid);
+    this.usersService.removeUser(userUid);
   }
 
 }

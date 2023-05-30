@@ -1,14 +1,32 @@
 <div>
-  <mat-form-field>
-    <mat-label>Tag</mat-label>
-    <input type="text" placeholder="max 15 char">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input type="text" placeholder="max 15 char">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Location</mat-label>
-    <input type="text" placeholder="max 15 char">
-  </mat-form-field>
+  <button [mat-dialog-close]="" class="close-icon" title="Close"><mat-icon>close</mat-icon></button>
+  <form [formGroup]="createCompetition" class="create-competition ">
+    <mat-form-field>
+      <mat-label>Tag</mat-label>
+      <input formControlName="tag" matInput maxlength="9" placeholder="10 chars max">
+      <mat-error *ngIf="createCompetition.get('tag')?.touched">Tag is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput>
+      <mat-error *ngIf="createCompetition.get('name')?.touched">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Location</mat-label>
+      <input formControlName="location" matInput>
+      <mat-error *ngIf="createCompetition.get('location')?.touched">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Date</mat-label>
+      <input matInput formControlName="date" [matDatepicker]="datePicker" (click)="datePicker" placeholder="dd/mm/yyyy">
+      <mat-datepicker #datePicker></mat-datepicker>
+      <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+      <mat-error *ngIf="createCompetition.get('date')?.touched">Date is required</mat-error>
+    </mat-form-field>
+    <div class="panel-button">
+      <button (click)="submitForm()"  title="Save Data" [mat-dialog-close]=""><mat-icon>save</mat-icon></button>
+      <button (click)="deleteForm(this.data.competition.id)" [mat-dialog-close]="" title="Delete Competition"><mat-icon>delete_forever</mat-icon></button>
+    </div>
+    <button class="finish-button" (click)="finishCompetition(this.data.competition.id)" [mat-dialog-close]="" title="Finish the competition">FINISH</button>
+  </form> 
 </div>
