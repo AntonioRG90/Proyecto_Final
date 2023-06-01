@@ -5,5 +5,5 @@ export interface Competitions {
   date: Date,
   created_by:string,
   status:boolean,
-  id: number
+  id: number,
 }

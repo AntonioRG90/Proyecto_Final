@@ -1,0 +1,46 @@
+<div>
+  <header>
+    <button [mat-dialog-close]="" class="close-icon" title="Close"><mat-icon>close</mat-icon></button>
+    <h2>Category</h2> 
+  </header>
+  <form [formGroup]="createCategory" class="create-category ">
+    <mat-form-field>
+      <mat-label>Tag</mat-label>
+      <input 
+        formControlName="tag"  
+        maxlength="8" 
+        placeholder="8 chars max"
+        matInput>
+      <mat-error *ngIf="createCategory.get('tag')?.touched">Tag is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input 
+        formControlName="name" 
+        matInput>
+      <mat-error *ngIf="createCategory.get('name')?.touched">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Gender</mat-label>
+      <mat-select  
+        formControlName="gender" 
+        matInput>
+        <mat-option value="men"> Men </mat-option>
+        <mat-option value="women"> Women </mat-option>
+      </mat-select>
+      <mat-error *ngIf="createCategory.get('gender')?.touched">Gender is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Slope Distance</mat-label>
+      <input 
+        formControlName="slope_distance" 
+        matInput>
+      <mat-error *ngIf="createCategory.get('slope_distance')?.touched">Slope distance is required</mat-error>
+    </mat-form-field>
+    <div class="panel-button">
+      <button (click)="submitForm()"  title="Send Data" [mat-dialog-close]=""><mat-icon>check</mat-icon></button>
+      <button (click)="deleteForm(this.data.category.category_of, this.data.category.id)" [mat-dialog-close]="" title="Delete Category"><mat-icon>delete_forever</mat-icon></button>
+      <button  [mat-dialog-close]="" title="Export Data to Excel"><mat-icon>table_chart</mat-icon></button>
+    </div>
+  </form> 
+</div>

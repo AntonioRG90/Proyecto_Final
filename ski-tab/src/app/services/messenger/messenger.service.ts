@@ -17,7 +17,7 @@ export class MessengerService {
         message:message,
       },
       duration: duration,
-      verticalPosition: 'top',
+      verticalPosition: 'bottom',
     });
   }
 }

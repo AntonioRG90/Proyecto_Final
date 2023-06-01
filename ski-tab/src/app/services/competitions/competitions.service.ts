@@ -68,7 +68,7 @@ export class CompetitionsService {
       date: data.date,
       created_by: data.created_by,
       status: true,
-      id: data.id
+      id: data.id,
     } ;
     return this.db.object(path).update(competition)
     .catch(error => console.log(error));

@@ -24,7 +24,7 @@
       <mat-error *ngIf="createCompetition.get('date')?.touched">Date is required</mat-error>
     </mat-form-field>
     <div class="panel-button">
-      <button (click)="submitForm()"  title="Save Data" [mat-dialog-close]=""><mat-icon>save</mat-icon></button>
+      <button (click)="submitForm()"  title="Send Data" [mat-dialog-close]=""><mat-icon>check</mat-icon></button>
       <button (click)="deleteForm(this.data.competition.id)" [mat-dialog-close]="" title="Delete Competition"><mat-icon>delete_forever</mat-icon></button>
     </div>
     <button class="finish-button" (click)="finishCompetition(this.data.competition.id)" [mat-dialog-close]="" title="Finish the competition">FINISH</button>

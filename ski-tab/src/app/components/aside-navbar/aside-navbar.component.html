@@ -1,20 +1,38 @@
-<div class="aside-panel">
+<div class="aside-panel" >
   <ul class="competitions-panel">
-    <li class="competitions" *ngFor="let competition of competitionsFiltered[0]">
+    <li class="competitions" *ngFor="let competition of competitionsFiltered">
       <div class="panel-buttons">
-        <button class="tag-button w-28" (click)="showHide(competition.id)" title="Open / Close">{{competition.tag}}</button>
-        <button (click)="openCreateCompetition(competition)" class="edit-button" title="Edit Competition"><mat-icon>edit</mat-icon></button>
+        <button 
+          class="tag-button w-28" 
+        >{{competition.tag}}</button>
+        <button 
+          class="create-category-button" 
+          title="Create category"
+          (click)="openCreateCategory(competition.id, emptyData)"
+        ><mat-icon>add</mat-icon></button>
+        <button 
+          (click)="openCreateCompetition(competition)" 
+          class="edit-button" 
+          title="Edit Competition"
+        ><mat-icon>edit</mat-icon></button>
       </div>
-      <ul class="categories" [hidden]="!hideCategory[competition.id]">
-        <li>
-          <div class="panel-buttons">
-            <button class="tag-button w-24">Jun W</button>
-            <button class="edit-button" title="Edit Category"><mat-icon>edit</mat-icon></button>
+      <ul class="categories">
+        <li *ngFor="let category of categories">
+          <div class="panel-buttons" *ngIf="category.category_of === competition.id">
+            <button class="tag-button w-24">{{category.tag}}</button>
+            <button 
+              class="edit-button" 
+              title="Edit Category" 
+              (click)="openCreateCategory(competition.id, category)"
+            ><mat-icon>edit</mat-icon></button>
           </div>
         </li>
       </ul>
-      <button *ngIf="competitions.length > 0" [hidden]="!hideCategory[competition.id]" class="create-button my-4" title="Create category">Create Category</button>
     </li>  
   </ul>
-  <button class="create-button" (click)="openCreateCompetition(emptyData)" title="Create Competition">Create Competition</button>
+  <button 
+    class="create-competition-button" 
+    (click)="openCreateCompetition(emptyData)" 
+    title="Create Competition"
+  >Create Competition</button>
 </div>

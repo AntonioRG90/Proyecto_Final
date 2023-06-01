@@ -47,10 +47,6 @@ export class CreateCompetitionComponent {
     } 
   }
 
-  clearForm(){
-    this.createCompetition.reset();
-  }
-
   deleteForm(id:number){
     this.competitionService.deleteCompetition(id);
   }

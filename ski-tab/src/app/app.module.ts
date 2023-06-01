@@ -31,6 +31,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_DATE_LOCALE, DateAdapter, MatNativeDateModule  } from '@angular/material/core';
 import { CustomDateAdapter } from './others/custom-date-adapter';
 import { FormatDatePipe } from './pipes/format-date/format-date.pipe';
+import { CreateCategoryComponent } from './components/create-category/create-category.component';
+import { MatSelectModule } from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,7 @@ import { FormatDatePipe } from './pipes/format-date/format-date.pipe';
     AsideNavbarComponent,
     CreateCompetitionComponent,
     FormatDatePipe,
+    CreateCategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +69,8 @@ import { FormatDatePipe } from './pipes/format-date/format-date.pipe';
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
+    MatSelectModule,
+    MatCardModule,
   ],
   providers: [
     CookieService,
