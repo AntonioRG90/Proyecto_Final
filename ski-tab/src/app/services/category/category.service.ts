@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { IdGeneratorService } from '../id-generator/id-generator.service';
 import { Category } from 'src/app/models/category';
-import { map } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -57,4 +57,6 @@ export class CategoryService {
     let paceTimeByGender = gender === "men"? 10.30 : 8.80;
     return +(slopeDistance/paceTimeByGender).toFixed(2);
   }
+
+ 
 }

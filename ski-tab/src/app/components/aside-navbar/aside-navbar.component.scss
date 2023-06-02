@@ -1,9 +1,11 @@
 @import './../../../assets/scss/variables.scss';
-.aside-panel{
-  @apply float-left w-52 h-screen font-extrabold text-base shadow-2xl;
+:host{
   background-color: $secondary-bg-color;
   border: solid 2px $button-bg-color;
   border-top: none;
+}
+.aside-panel{
+  @apply w-52 h-screen font-extrabold text-base shadow-2xl;
   font-family: $titles-font;
   .competitions-panel{
     @apply my-5 mx-3;

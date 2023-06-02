@@ -40,7 +40,13 @@
     <div class="panel-button">
       <button (click)="submitForm()"  title="Send Data" [mat-dialog-close]=""><mat-icon>check</mat-icon></button>
       <button (click)="deleteForm(this.data.category.category_of, this.data.category.id)" [mat-dialog-close]="" title="Delete Category"><mat-icon>delete_forever</mat-icon></button>
-      <button  [mat-dialog-close]="" title="Export Data to Excel"><mat-icon>table_chart</mat-icon></button>
     </div>
-  </form> 
+  </form>
+  <nav>
+    <ul class="panel-button">
+      <li><button>Import competitors from Excel</button></li>
+      <li><button>Export competitor to Excel</button></li>
+      <li><button>Delete all competitors</button></li>
+    </ul>
+  </nav>
 </div>

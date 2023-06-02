@@ -1,10 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CompetitionsService } from 'src/app/services/competitions/competitions.service';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 
@@ -20,7 +19,6 @@ export class CreateCompetitionComponent {
     private cookieService: CookieService,
     private jwt: JwtHelperService,
     private competitionService: CompetitionsService,
-    private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ){}
 

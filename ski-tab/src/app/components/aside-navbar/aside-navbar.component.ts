@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateCompetitionComponent } from '../create-competition/create-competition.component';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CompetitionsService } from 'src/app/services/competitions/competitions.service';
-import { Router } from '@angular/router';
-import { map } from 'rxjs';
+
+import { BehaviorSubject } from 'rxjs';
 import { CreateCategoryComponent } from '../create-category/create-category.component';
 import { CategoryService } from '../../services/category/category.service';
+import { CreateCompetitorComponent } from '../create-competitor/create-competitor.component';
+import { CompetitorService } from '../../services/competitor/competitor.service';
 
 @Component({
   selector: 'app-aside-navbar',
@@ -22,7 +24,7 @@ export class AsideNavbarComponent {
     private jwt: JwtHelperService,
     private competitionService: CompetitionsService,
     private categoryService: CategoryService,
-    private router: Router,
+    private competitorService: CompetitorService,
   ){}
 
   userToken = this.cookieService.get('accessToken');
@@ -31,13 +33,18 @@ export class AsideNavbarComponent {
   competitionsFiltered: any[] = [];
   categoryId: number = 0;
   categories: any[] = [];
-  hideCategory: boolean [] = [];
   emptyData: any[] = [];
-  refreshData = false;
+
+
 
   ngOnInit(){
+    this.competitionsFiltered.length = 0;
     this.categories.length = 0;
     this.getCompetitions();
+  }
+
+  @HostListener('window:keyup.esc') onKeyUp() {
+    this.dialog.closeAll();
   }
 
   openCreateCompetition(competition: any){
@@ -54,6 +61,16 @@ export class AsideNavbarComponent {
     const dialogRef = this.dialog.open(CreateCategoryComponent,{
       width: '350px',
       data: {competitionId, category},
+    })
+    dialogRef.afterClosed().subscribe(( )=>{
+      this.ngOnInit();
+    })
+  }
+
+  openCreateCompetitor(competitionId:number, categoryId:number){
+    const dialogRef = this.dialog.open(CreateCompetitorComponent,{
+      width: '350px',
+      data:{competitionId, categoryId},
     })
     dialogRef.afterClosed().subscribe(( )=>{
       this.ngOnInit();
@@ -80,4 +97,8 @@ export class AsideNavbarComponent {
     } )
   }
   
+  shareDataToBoard(competitionId: number, categoryId: number, categoryPaceTime: number, categoryGender:string){
+    this.competitorService.shareDataToBoard([competitionId, categoryId, categoryPaceTime, categoryGender]);
+  }
+
 }

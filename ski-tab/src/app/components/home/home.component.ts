@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AsideNavbarComponent } from '../aside-navbar/aside-navbar.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
@@ -6,6 +7,10 @@ import { MatDialogModule } from '@angular/material/dialog';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent{
+
+
+  ngOnInit(){
+  }
 
 }

@@ -1,0 +1,18 @@
+<div>
+  <button [mat-dialog-close]="" class="close-icon" title="Close"><mat-icon>close</mat-icon></button>
+  <form [formGroup]="createCompetitorForm" class="create-competition ">
+    <mat-form-field>
+      <mat-label>Bib</mat-label>
+      <input formControlName="bib"  matInput>
+      <mat-error *ngIf="createCompetitorForm.get('bib')?.touched">Bib is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput>
+      <mat-error *ngIf="createCompetitorForm.get('name')?.touched">Name is required</mat-error>
+    </mat-form-field>
+    <div class="panel-button">
+      <button (click)="createCompetitor()"  title="Send Data" [mat-dialog-close]=""><mat-icon>check</mat-icon></button>
+    </div>
+  </form> 
+</div>

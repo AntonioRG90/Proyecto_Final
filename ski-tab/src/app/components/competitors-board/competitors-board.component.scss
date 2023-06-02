@@ -1,0 +1,38 @@
+@import './../../../assets/scss/variables.scss';
+
+.panel-button{
+  @apply flex;
+}
+
+
+th{
+  border: 1px solid black;
+}
+
+thead{
+  background-color: $secondary-bg-color;
+  th{
+    @apply h-7;
+  }
+  .last-row th{
+    @apply px-2;
+  }
+}
+
+tbody{
+  td{
+    border: 1px solid black;
+  }
+}
+
+.border-b-none{
+  border-bottom: none;
+}
+
+.border-l-none{
+  border-left: none;
+}
+
+.border-r-none{
+  border-right: none;
+}

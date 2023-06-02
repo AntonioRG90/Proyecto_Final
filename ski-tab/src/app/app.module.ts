@@ -34,6 +34,9 @@ import { FormatDatePipe } from './pipes/format-date/format-date.pipe';
 import { CreateCategoryComponent } from './components/create-category/create-category.component';
 import { MatSelectModule } from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
+import { CompetitorsBoardComponent } from './components/competitors-board/competitors-board.component';
+import { CreateCompetitorComponent } from './components/create-competitor/create-competitor.component';
+import { ScoreCompetitorsComponent } from './components/score-competitors/score-competitors.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,9 @@ import {MatCardModule} from '@angular/material/card';
     CreateCompetitionComponent,
     FormatDatePipe,
     CreateCategoryComponent,
+    CompetitorsBoardComponent,
+    CreateCompetitorComponent,
+    ScoreCompetitorsComponent,
   ],
   imports: [
     BrowserModule,

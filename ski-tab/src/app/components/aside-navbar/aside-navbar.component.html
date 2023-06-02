@@ -19,7 +19,12 @@
       <ul class="categories">
         <li *ngFor="let category of categories">
           <div class="panel-buttons" *ngIf="category.category_of === competition.id">
-            <button class="tag-button w-24">{{category.tag}}</button>
+            <button (click)="shareDataToBoard(competition.id, category.id, category.pace_time, category.gender)" class="tag-button w-24">{{category.tag}}</button>
+            <button
+              class="edit-button" 
+              title="Add Competitor"
+              (click)="openCreateCompetitor(competition.id, category.id)"
+            ><mat-icon>add</mat-icon></button>
             <button 
               class="edit-button" 
               title="Edit Category" 
