@@ -1,8 +1,15 @@
 @import './../../../assets/scss/variables.scss';
 .navbar{
-  @apply flex justify-around items-center h-16 shadow-2xl;
+  @apply flex justify-between items-center h-16 shadow-2xl px-6;
   background-color: $button-bg-color;
   color: $secondary-text-color;
+  .toggle{
+    @apply rounded-md border-2 h-8;
+    &:hover{
+      color: $button-hover-color;
+      border-color: $button-hover-color;
+    }
+  }
   .logo{
     @apply h-fit;
     a{

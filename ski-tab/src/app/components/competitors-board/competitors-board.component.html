@@ -1,5 +1,5 @@
 <div class="score-panel" *ngIf="competitors.length > 0">
-  <table>
+  <table> 
     <thead>
       <tr>
         <th rowspan="3" class="px-2">Rank</th>
@@ -62,7 +62,10 @@
         <td>{{competitor.turns_j3_d}}</td>
         <td>{{competitor.turns_total}}</td>
         <td>{{competitor.run_score}}</td>
-        <button (click)="openScoreCompetitor(this.competitionId, this.categoryId, this.paceTime, this.gender, competitor)"><mat-icon>edit</mat-icon></button>
+        <button 
+          (click)="openScoreCompetitor(this.competitionId, this.categoryId, this.paceTime, this.gender, competitor)"
+          class="score"
+        ><mat-icon>edit</mat-icon></button>
       </tr>
     </tbody>
   </table>

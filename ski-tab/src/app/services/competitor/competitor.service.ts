@@ -18,6 +18,7 @@ export class CompetitorService {
 
   data = new BehaviorSubject([]);
   sharedData = this.data.asObservable();
+  
   dd:{[index: string]: any} = {
     '3': [0.68, 0.78],
     '3p': [0.71, 0.81],
@@ -141,7 +142,19 @@ export class CompetitorService {
 
   getCompetitors(competitionId:number, categoryId:number){
     const path = 'competitions/'+ competitionId + '/categories/' + categoryId +'/competitors/';
-    return this.db.list(path).snapshotChanges().pipe(
+    return this.db.list(path, ref =>{return ref.orderByChild('bib')}).snapshotChanges().pipe(
+      map(actions => 
+        actions.map(a => {
+          const data = a.payload.val() as Competitor;
+          return { ...data };
+        })
+      )
+    )
+  }
+
+  getCompetitorsOrder(competitionId:number, categoryId:number){
+    const path = 'competitions/'+ competitionId + '/categories/' + categoryId +'/competitors/';
+    return this.db.list(path, ref =>{return ref.orderByChild('run_score')}).snapshotChanges().pipe(
       map(actions => 
         actions.map(a => {
           const data = a.payload.val() as Competitor;
@@ -153,6 +166,11 @@ export class CompetitorService {
 
   deleteCompetitor(competitionId:number, categoryId: number, competitorId:number){
     const path = 'competitions/' + competitionId + '/categories/' + categoryId + '/competitors/' + competitorId;
+    return this.db.object(path).remove();
+  }
+
+  deleteAllCompetitors(competitionId:number, categoryId:number){
+    const path = 'competitions/' + competitionId + '/categories/' + categoryId + '/competitors/';
     return this.db.object(path).remove();
   }
   

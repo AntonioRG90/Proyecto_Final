@@ -1,0 +1,53 @@
+@import './../../../assets/scss/variables.scss';
+
+.chat{
+  @apply overflow-y-auto xl:max-w-7xl mx-auto;
+  height: 82vh;
+  h3{
+   @apply my-3;
+
+   .clear{
+    @apply my-2 px-2 rounded-md border-2;
+    background-color: rgba(255, 0, 0, 0.3);
+    border-color: black;
+   }
+  }
+
+  .messages-panel{
+    @apply w-5/6 mx-auto border-2 rounded-xl mt-5;
+    min-height: 70vh;
+    
+  }
+
+  .message-form{
+    @apply w-5/6 mx-auto sticky bottom-0;
+
+    .message-input{
+      @apply w-full mx-auto;
+    }
+  }
+}
+
+.user-messages{
+  @apply flex flex-row justify-end ;
+
+  div{
+    @apply text-left m-2 p-2 border rounded-md w-fit;
+    background-color: rgba(0, 128, 0, 0.3);
+    .name{
+      @apply text-xs;
+    }
+  }  
+}
+
+.rest-messages{
+  @apply flex flex-row justify-start;
+
+  div{
+    @apply text-left m-2 p-2 border rounded-md w-fit;
+    background-color: $secondary-bg-color;
+    .name{
+      @apply text-xs;
+    }
+  }  
+}

@@ -1,0 +1,30 @@
+<div class="chat">
+  <div class="messages-panel">
+    <h3>Ask any doubts to the community or give us a feedback!
+      <button 
+        class="clear" 
+        (click)="deleteAllMessages()"
+        *ngIf="userRole"  
+      >Clear chat</button>
+    </h3>
+    <div *ngFor="let message of messages" >
+      <div [ngClass]="message.userId == userId ? 'user-messages' : 'rest-messages'">
+        <div>
+          <p class="name">{{message.userName}}:</p>
+          <p class="message">{{message.message}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="sendMessageForm" class="message-form">
+    <mat-form-field class="message-input">
+      <input 
+        type="text" 
+        formControlName="message" 
+        placeholder="Write a message..."
+        matInput
+        (keyup.enter)="submitForm()"
+      >
+    </mat-form-field>
+  </form>
+</div>

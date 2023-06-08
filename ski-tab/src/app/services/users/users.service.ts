@@ -77,5 +77,4 @@ export class UsersService {
     this.db.object(path).set(userToInsert)
     .catch(error => console.log(error));
   }
-
 }

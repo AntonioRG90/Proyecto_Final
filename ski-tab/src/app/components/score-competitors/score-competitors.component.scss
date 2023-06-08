@@ -1,0 +1,56 @@
+@import './../../../assets/scss/variables.scss';
+
+header{
+  @apply text-xl mb-4 h-10 flex;
+  background-color: $button-bg-color;
+  color: $button-text-color;
+  h2{
+    @apply  pt-1 tracking-widest font-extrabold ml-5;
+    font-family: $titles-font;
+  }
+  .close-icon{
+    @apply h-10 w-10 sticky;
+    left: 325px;
+  }
+}
+
+fieldset{
+  @apply border-2;
+}
+
+.score-competitor{
+  .data{
+    .bib{
+      @apply w-14 mr-2;
+    }
+  }
+
+  .time{
+    .seconds{
+      @apply w-20;
+    }
+  }
+
+  .score-input{
+    @apply w-20 mx-2;
+  }
+
+  .main-legend{
+    background-color: $button-bg-color;
+  }
+}
+
+button{
+  background-color: $button-bg-color;
+  color: $button-text-color;
+  font-family: $titles-font;
+  &:hover{
+    color: $button-hover-color;
+  }
+}
+
+.panel-button{
+  button{
+    @apply rounded-md h-14 w-14 mx-4 my-5;
+  }
+}

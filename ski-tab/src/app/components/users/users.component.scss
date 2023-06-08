@@ -3,10 +3,13 @@
   @apply w-fit m-auto;
 }
 .users{
-  @apply flex justify-end items-center my-3 h-11 px-6 rounded-2xl shadow-lg;
+  @apply flex flex-col justify-end items-center my-3 rounded-2xl shadow-lg md:px-4 md:flex-row;
   background-color: $secondary-bg-color;
+  p{
+    @apply h-10 flex items-center justify-center;
+  }
   .panelButton{
-    @apply ml-4 flex justify-center items-center;
+    @apply ml-4 flex justify-center items-center pb-3 md:pb-0;
     button{
       @apply inline-flex justify-center items-center w-24 mx-2 py-2 border-2 rounded-md;
       border-color: $primary-text-color;

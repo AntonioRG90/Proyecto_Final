@@ -5,13 +5,13 @@
 }
 
 .competitions{
-  @apply flex justify-end items-center my-3 h-11 px-6 rounded-2xl shadow-lg;
+  @apply flex justify-end items-center my-3 px-6 rounded-2xl shadow-lg flex-col md:flex-row;
   background-color: $secondary-bg-color;
   
   .panelTag{
     @apply flex justify-center items-center;
     p{
-      @apply mx-3;
+      @apply mx-3 h-11 flex items-center justify-center;
     }
   }
 

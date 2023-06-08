@@ -1,0 +1,25 @@
+@import './../../../assets/scss/variables.scss';
+
+.confirm-dialog{
+  @apply border-2 shadow-inner;
+  border-color: $button-bg-color;
+  p{
+    @apply text-lg font-semibold;
+  }
+  .panel-buttons{
+    @apply flex justify-around;
+    button{
+     @apply w-16 py-2 border-2 rounded-md shadow;
+     border-color: $button-bg-color;
+    }
+  }
+  
+}
+
+.confirm{
+  background-color: rgba(0, 128, 0, 0.3);
+}
+
+.dismiss{
+  background-color: rgba(255, 0, 0, 0.3);
+}

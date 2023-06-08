@@ -36,6 +36,7 @@ const firebaseConfig = {
 
 const admin = require("firebase-admin");
 admin.initializeApp(firebaseConfig);
+const nodemailer = require('nodemailer');
 
 const cors = require("cors")({origin:true});
 
@@ -61,3 +62,38 @@ export const deleteUser = functions.https.onRequest(async (request, response) =>
       })
   })
 });
+
+export const requestActivationMail = functions.https.onRequest(async (request, response) => {
+  cors(request, response, () => {
+    const mailOptions = {
+      from: 'skitab.soft@outlook.es',
+      to: 'skitab.soft@gmail.com',
+      subject: 'Activation Request',
+      html: ''
+    };
+
+    mailOptions.html = `<p> Account activation request for: ${request.body.userMail}</p>`;
+
+    if(request.body.userMail === undefined){
+      response.status(400).send('Error: information is necessary');
+      return 'Error: information is necessary';
+    }
+
+    return mailTransport.sendMail(mailOptions).then( () => {
+      response.status(200).send(true);
+      return 'Email sent';
+    })
+    .catch( (reason:any) => {
+      response.status(500).send('Error while sending email: '+reason);
+    });
+  })
+})
+
+const mailTransport = nodemailer.createTransport({
+  service: 'hotmail',
+  secure: false,
+  auth: {
+    user: 'skitab.soft@outlook.es',
+    pass: '123456St*.'
+  }
+})

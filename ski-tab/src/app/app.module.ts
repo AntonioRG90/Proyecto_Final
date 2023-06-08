@@ -37,6 +37,9 @@ import {MatCardModule} from '@angular/material/card';
 import { CompetitorsBoardComponent } from './components/competitors-board/competitors-board.component';
 import { CreateCompetitorComponent } from './components/create-competitor/create-competitor.component';
 import { ScoreCompetitorsComponent } from './components/score-competitors/score-competitors.component';
+import { WelcomeMessageComponent } from './components/welcome-message/welcome-message.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,9 @@ import { ScoreCompetitorsComponent } from './components/score-competitors/score-
     CompetitorsBoardComponent,
     CreateCompetitorComponent,
     ScoreCompetitorsComponent,
+    WelcomeMessageComponent,
+    ConfirmDialogComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,

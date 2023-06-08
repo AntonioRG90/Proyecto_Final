@@ -1,7 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CompetitorService } from '../../services/competitor/competitor.service';
+import { MessengerService } from 'src/app/services/messenger/messenger.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-score-competitors',
@@ -12,6 +14,8 @@ export class ScoreCompetitorsComponent {
   constructor(
     private formBuilder: FormBuilder,
     private competitorService: CompetitorService,
+    private dialog: MatDialog,
+    private messengerService: MessengerService,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ){}
   
@@ -42,7 +46,7 @@ export class ScoreCompetitorsComponent {
   })
 
   ngOnInit(){
-    console.log(this.data);
+    
   }
 
   scoreCompetitor(){
@@ -51,8 +55,19 @@ export class ScoreCompetitorsComponent {
     } 
   }
 
-  deleteCompetitor(competitorId:number){
-    this.competitorService.deleteCompetitor(this.data.competitionId, this.data.categoryId, competitorId);
+  deleteCompetitor(){
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data:{
+        title: 'Delete competitor?'
+      }
+    })
+    dialogRef.afterClosed().subscribe( check => {
+      if(check) {
+        this.competitorService.deleteCompetitor(this.data.competitionId, this.data.categoryId, this.data.competitor.id);
+        this.messengerService.showNotification("Competitor deleted!", 2000);
+      }    
+    })
+    
   }
 
 }

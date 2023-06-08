@@ -1,5 +1,19 @@
 @import './../../../assets/scss/variables.scss';
 
+header{
+  @apply text-xl mb-4 h-10 flex;
+  background-color: $button-bg-color;
+  color: $button-text-color;
+  h2{
+    @apply w-32 pt-1 tracking-widest font-extrabold;
+    font-family: $titles-font;
+  }
+  .close-icon{
+    @apply  h-10 w-10 sticky;
+    left: 325px;
+  }
+}
+
 button{
   background-color: $button-bg-color;
   color: $button-text-color;
@@ -8,16 +22,20 @@ button{
     color: $button-hover-color;
   }
 }
-.close-icon{
-  @apply border-2 rounded-full h-7 sticky;
-  left: 325px;
-}
 
 .create-category{
-  @apply flex flex-col justify-center w-80 mx-auto;
+  @apply flex flex-col justify-center w-80 mx-auto; 
 
   button{
     @apply p-3 m-2 rounded-md;
+  }
+
+  .gender-slope{
+    @apply flex justify-around;
+  }
+
+  .slope, .gender{
+    @apply w-28;
   }
 
   .panel-button{
@@ -25,4 +43,35 @@ button{
       @apply px-4;
     }
   }
+}
+
+.panel-actions{
+  @apply border-2 rounded-md mt-2;
+  border-color: $button-bg-color;
+  h3{
+    background-color:$button-bg-color;
+    color: $button-text-color;
+    font-family: $titles-font;
+  }
+ 
+  li{
+    @apply my-2 h-10;
+
+    .file-upload{
+      @apply w-fit rounded-md mx-auto px-4 h-10;
+      background-color:$button-bg-color;
+      color: $button-text-color;
+      button{
+        @apply h-6;
+      }
+    }
+
+    .export, .delete-all{
+      @apply px-4 py-2 rounded-md;
+    }
+  }
+}
+
+.file-input{
+  display: none;
 }

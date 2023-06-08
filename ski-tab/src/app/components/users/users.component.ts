@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { UsersService } from 'src/app/services/users/users.service';
 import { AuthService } from '../../services/auth/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MessengerService } from 'src/app/services/messenger/messenger.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-users',
@@ -11,7 +14,9 @@ import { AuthService } from '../../services/auth/auth.service';
 export class UsersComponent {
   constructor(
     private usersService: UsersService,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private messengerService: MessengerService,
   ){}
 
   users: any[] = [];
@@ -36,9 +41,20 @@ export class UsersComponent {
   }
 
   removeUser(userUid:any, userEmail:any){
-    userEmail = {'userEmail': userEmail};
-    this.authService.gdelete(userEmail).subscribe();
-    this.usersService.removeUser(userUid);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data:{
+        title: 'Delete user?'
+      }
+    })
+    dialogRef.afterClosed().subscribe( check => {
+      if(check) {
+        userEmail = {'userEmail': userEmail};
+        this.authService.gdelete(userEmail).subscribe();
+        this.usersService.removeUser(userUid);
+        this.messengerService.showNotification("User deleted!", 2000);
+      }    
+    })
+
   }
 
 }

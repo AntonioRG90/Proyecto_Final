@@ -21,9 +21,7 @@ export class CategoryService {
         actions.map(a => {
           const data = a.payload.val() as Category;
           return { ...data };
-        }).filter(a =>
-          a.category_of == competitionId
-        )
+        })
       )
     );
   }

@@ -1,4 +1,4 @@
-<div class="aside-panel" >
+<div class="aside-panel" *ngIf="show">
   <ul class="competitions-panel">
     <li class="competitions" *ngFor="let competition of competitionsFiltered">
       <div class="panel-buttons">
@@ -19,7 +19,10 @@
       <ul class="categories">
         <li *ngFor="let category of categories">
           <div class="panel-buttons" *ngIf="category.category_of === competition.id">
-            <button (click)="shareDataToBoard(competition.id, category.id, category.pace_time, category.gender)" class="tag-button w-24">{{category.tag}}</button>
+            <button 
+              (click)="shareDataToBoard(competition.id, category.id, category.pace_time, category.gender)" 
+              class="tag-button category w-24"
+            >{{category.tag}}</button>
             <button
               class="edit-button" 
               title="Add Competitor"

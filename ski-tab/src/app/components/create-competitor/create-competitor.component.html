@@ -1,9 +1,12 @@
 <div>
-  <button [mat-dialog-close]="" class="close-icon" title="Close"><mat-icon>close</mat-icon></button>
-  <form [formGroup]="createCompetitorForm" class="create-competition ">
-    <mat-form-field>
+  <header>
+    <h2>CREATE COMPETITOR</h2>
+    <button [mat-dialog-close]="" class="close-icon" title="Close"><mat-icon>close</mat-icon></button>
+  </header>
+  <form [formGroup]="createCompetitorForm" class="create-competitor ">
+    <mat-form-field class="bib">
       <mat-label>Bib</mat-label>
-      <input formControlName="bib"  matInput>
+      <input formControlName="bib"  matInput type="number">
       <mat-error *ngIf="createCompetitorForm.get('bib')?.touched">Bib is required</mat-error>
     </mat-form-field>
     <mat-form-field>

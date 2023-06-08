@@ -1,5 +1,8 @@
 <div>
-  <button [mat-dialog-close]="" class="close-icon" title="Close"><mat-icon>close</mat-icon></button>
+  <header>
+    <h2>COMPETITION</h2>
+    <button [mat-dialog-close]="" class="close-icon" title="Close"><mat-icon>close</mat-icon></button>
+  </header>
   <form [formGroup]="createCompetition" class="create-competition ">
     <mat-form-field>
       <mat-label>Tag</mat-label>
@@ -27,6 +30,6 @@
       <button (click)="submitForm()"  title="Send Data" [mat-dialog-close]=""><mat-icon>check</mat-icon></button>
       <button (click)="deleteForm(this.data.competition.id)" [mat-dialog-close]="" title="Delete Competition"><mat-icon>delete_forever</mat-icon></button>
     </div>
-    <button class="finish-button" (click)="finishCompetition(this.data.competition.id)" [mat-dialog-close]="" title="Finish the competition">FINISH</button>
+    <button class="finish-button" (click)="finishCompetition(this.data.competition.id)" [mat-dialog-close]="" title="Finish the competition">Disable Competition</button>
   </form> 
 </div>

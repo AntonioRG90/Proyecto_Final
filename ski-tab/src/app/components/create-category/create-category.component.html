@@ -1,7 +1,7 @@
 <div>
   <header>
     <button [mat-dialog-close]="" class="close-icon" title="Close"><mat-icon>close</mat-icon></button>
-    <h2>Category</h2> 
+    <h2>CATEGORY</h2> 
   </header>
   <form [formGroup]="createCategory" class="create-category ">
     <mat-form-field>
@@ -20,33 +20,46 @@
         matInput>
       <mat-error *ngIf="createCategory.get('name')?.touched">Name is required</mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Gender</mat-label>
-      <mat-select  
-        formControlName="gender" 
-        matInput>
-        <mat-option value="men"> Men </mat-option>
-        <mat-option value="women"> Women </mat-option>
-      </mat-select>
-      <mat-error *ngIf="createCategory.get('gender')?.touched">Gender is required</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Slope Distance</mat-label>
-      <input 
-        formControlName="slope_distance" 
-        matInput>
-      <mat-error *ngIf="createCategory.get('slope_distance')?.touched">Slope distance is required</mat-error>
-    </mat-form-field>
+    <div class="gender-slope">
+      <mat-form-field class="gender">
+        <mat-label>Gender</mat-label>
+        <mat-select  
+          formControlName="gender" 
+          matInput>
+          <mat-option value="men"> Men </mat-option>
+          <mat-option value="women"> Women </mat-option>
+        </mat-select>
+        <mat-error *ngIf="createCategory.get('gender')?.touched">Gender is required</mat-error>
+      </mat-form-field>
+      <mat-form-field class="slope">
+        <mat-label>Slope Distance</mat-label>
+        <input 
+          formControlName="slope_distance"
+          type="number"
+          matInput>
+        <mat-error *ngIf="createCategory.get('slope_distance')?.touched">* Required</mat-error>
+      </mat-form-field>
+    </div>
     <div class="panel-button">
       <button (click)="submitForm()"  title="Send Data" [mat-dialog-close]=""><mat-icon>check</mat-icon></button>
       <button (click)="deleteForm(this.data.category.category_of, this.data.category.id)" [mat-dialog-close]="" title="Delete Category"><mat-icon>delete_forever</mat-icon></button>
     </div>
   </form>
-  <nav>
-    <ul class="panel-button">
-      <li><button>Import competitors from Excel</button></li>
-      <li><button>Export competitor to Excel</button></li>
-      <li><button>Delete all competitors</button></li>
-    </ul>
-  </nav>
+  <ul class="panel-actions">
+    <h3>More Actions</h3>
+    <li>
+      <input 
+        type="file" 
+        class="file-input"
+        (change)="importCategory($event)" 
+        #fileUpload
+        >
+      <div class="file-upload" (click)="fileUpload.click()">
+        Import Category 
+        <button mat-mini-fab color="primary" class="upload-btn" ></button>
+      </div>
+    </li>
+    <li><button (click)="exportCategory()" class="export">Export Category</button></li>
+    <li><button (click)="deleteAllUsers()" class="delete-all" [mat-dialog-close]="">Delete All Competitors</button></li>
+  </ul>
 </div>

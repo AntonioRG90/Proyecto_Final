@@ -3,7 +3,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CompetitionsService } from 'src/app/services/competitions/competitions.service';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MessengerService } from '../../services/messenger/messenger.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 
 
@@ -19,6 +22,9 @@ export class CreateCompetitionComponent {
     private cookieService: CookieService,
     private jwt: JwtHelperService,
     private competitionService: CompetitionsService,
+    private messengerService: MessengerService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ){}
 
@@ -42,14 +48,35 @@ export class CreateCompetitionComponent {
   submitForm(){
     if(!this.createCompetition.invalid){
       this.competitionService.createCompetition(this.createCompetition.value);
+      this.messengerService.showNotification("A competition has been created!", 2000);
     } 
   }
 
   deleteForm(id:number){
-    this.competitionService.deleteCompetition(id);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data:{
+        title: 'Delete competition?'
+      }
+    })
+    dialogRef.afterClosed().subscribe( check => {
+      if(check) {
+        this.competitionService.deleteCompetition(id);
+        this.messengerService.showNotification("Competition deleted!", 2000);
+      }    
+    })
   }
 
   finishCompetition(id:number){
-    this.competitionService.setFinishStatus(id);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data:{
+        title: 'Disable competition?'
+      }
+    })
+    dialogRef.afterClosed().subscribe( check => {
+      if(check) {
+        this.competitionService.setFinishStatus(id);
+        this.messengerService.showNotification('Competition disabled!', 2000);
+      }    
+    })
   }
 }

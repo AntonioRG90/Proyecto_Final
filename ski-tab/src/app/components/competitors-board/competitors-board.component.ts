@@ -3,6 +3,7 @@ import { CompetitorService } from '../../services/competitor/competitor.service'
 import { Competitor } from 'src/app/models/competitor';
 import { MatDialog } from '@angular/material/dialog';
 import { ScoreCompetitorsComponent } from '../score-competitors/score-competitors.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-competitors-board',
@@ -21,9 +22,14 @@ export class CompetitorsBoardComponent {
   categoryId: number = 0;
   paceTime: number = 0;
   gender: string = "";
+  
 
   ngOnInit(){
     this.getCompetitors();
+  }
+
+  ngOnDestroy(){
+   
   }
 
   getCompetitors(){
@@ -39,13 +45,13 @@ export class CompetitorsBoardComponent {
   }
 
   openScoreCompetitor(competitionId:number, categoryId:number, paceTime:number, gender:string, competitor:any){
-    console.log(paceTime, gender);
     const dialogRef = this.dialog.open(ScoreCompetitorsComponent,{
       data:{competitionId, categoryId, paceTime, gender, competitor},
+      width: '350px',
+      panelClass: 'custom-dialog-container',
     })
     dialogRef.afterClosed().subscribe(( )=>{
-      this.ngOnInit();
+      
     })
   }
-
 }

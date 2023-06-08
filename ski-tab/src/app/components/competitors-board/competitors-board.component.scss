@@ -1,18 +1,17 @@
 @import './../../../assets/scss/variables.scss';
 
-.panel-button{
-  @apply flex;
-}
-
-
-th{
-  border: 1px solid black;
+.score-panel{
+  @apply w-fit mx-auto mt-6;
+  table{
+    @apply mx-4;
+  }
 }
 
 thead{
   background-color: $secondary-bg-color;
   th{
     @apply h-7;
+    border: 1px solid black;
   }
   .last-row th{
     @apply px-2;
@@ -21,7 +20,13 @@ thead{
 
 tbody{
   td{
+    @apply p-1 align-middle;
     border: 1px solid black;
+  }
+  .score{
+    @apply flex;
+    background-color: $button-bg-color;
+    color: $button-text-color;
   }
 }
 

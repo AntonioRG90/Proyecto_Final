@@ -1,111 +1,93 @@
 <div>
-  <button [mat-dialog-close]="" class="close-icon" title="Close"><mat-icon>close</mat-icon></button>
-  <form [formGroup]="scoreCompetitorForm" class="create-competition ">
-    <fieldset>
+  <header>
+    <h2>SCORE COMPETITOR</h2>
+    <button [mat-dialog-close]="" class="close-icon" title="Close"><mat-icon>close</mat-icon></button>
+  </header>
+  <form [formGroup]="scoreCompetitorForm" class="score-competitor" mat-dialog-content>
+    <fieldset class="data">
       <legend>Competitor Data</legend>
-      <mat-form-field>
+      <mat-form-field class="bib">
         <mat-label>Bib</mat-label>
         <input formControlName="bib"  matInput>
-        <mat-error *ngIf="scoreCompetitorForm.get('bib')?.touched">Bib is required</mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Name</mat-label>
         <input formControlName="name" matInput>
-        <mat-error *ngIf="scoreCompetitorForm.get('name')?.touched">Name is required</mat-error>
       </mat-form-field>
     </fieldset>
-    <fieldset>
+    <fieldset class="time">
       <legend>Time Score</legend>
-      <mat-form-field>
+      <mat-form-field class="seconds">
         <mat-label>Time</mat-label>
         <input formControlName="time_seconds"  matInput>
-        <mat-error *ngIf="scoreCompetitorForm.get('time_seconds')?.touched">Time is required</mat-error>
+      </mat-form-field>
+    </fieldset>
+    <fieldset class="jump1">
+      <legend>Jump 1</legend>
+      <mat-form-field class="score-input">
+        <mat-label>Judge 4</mat-label>
+        <input formControlName="jump1_j4_points"  matInput>
+      </mat-form-field>
+      <mat-form-field class="score-input">
+        <mat-label>Judge 5</mat-label>
+        <input formControlName="jump1_j5_points"  matInput>
+      </mat-form-field>
+      <mat-form-field class="score-input">
+        <mat-label>Trick</mat-label>
+        <input formControlName="jump1_trick"  matInput>
       </mat-form-field>
     </fieldset>
     <fieldset>
-      <legend>Air Score</legend>
-      <fieldset>
-        <legend>Jump 1</legend>
-        <mat-form-field>
-          <mat-label>Judge 4</mat-label>
-          <input formControlName="jump1_j4_points"  matInput>
-          <mat-error *ngIf="scoreCompetitorForm.get('jump1_j4_points')?.touched">Score is required</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Judge 5</mat-label>
-          <input formControlName="jump1_j5_points"  matInput>
-          <mat-error *ngIf="scoreCompetitorForm.get('jump1_j5_points')?.touched">Score is required</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Trick</mat-label>
-          <input formControlName="jump1_trick"  matInput>
-          <mat-error *ngIf="scoreCompetitorForm.get('jump1_trick')?.touched">Trick is required</mat-error>
-        </mat-form-field>
-      </fieldset>
-      <fieldset>
-        <legend>Jump 2</legend>
-        <mat-form-field>
-          <mat-label>Judge 4</mat-label>
-          <input formControlName="jump2_j4_points"  matInput>
-          <mat-error *ngIf="scoreCompetitorForm.get('jump2_j4_points')?.touched">Score  is required</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Judge 5</mat-label>
-          <input formControlName="jump2_j5_points"  matInput>
-          <mat-error *ngIf="scoreCompetitorForm.get('jump2_j5_points')?.touched">Score is required</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Trick</mat-label>
-          <input formControlName="jump2_trick"  matInput>
-          <mat-error *ngIf="scoreCompetitorForm.get('jump2_trick')?.touched">Trick is required</mat-error>
-        </mat-form-field>
-      </fieldset>
+      <legend>Jump 2</legend>
+      <mat-form-field class="score-input">
+        <mat-label>Judge 4</mat-label>
+        <input formControlName="jump2_j4_points"  matInput>
+      </mat-form-field>
+      <mat-form-field class="score-input">
+        <mat-label>Judge 5</mat-label>
+        <input formControlName="jump2_j5_points"  matInput>
+      </mat-form-field>
+      <mat-form-field class="score-input">
+        <mat-label>Trick</mat-label>
+        <input formControlName="jump2_trick"  matInput>
+      </mat-form-field>
+    </fieldset>
+    <fieldset >
+      <legend>Judge 1</legend>
+      <mat-form-field class="score-input">
+        <mat-label>Base Score</mat-label>
+        <input formControlName="turns_j1_b"  matInput>
+      </mat-form-field>
+      <mat-form-field class="score-input">
+        <mat-label>Deductions</mat-label>
+        <input formControlName="turns_j1_d"  matInput>
+      </mat-form-field>
     </fieldset>
     <fieldset>
-      <legend>Turns Score</legend>
-      <fieldset>
-        <legend>Judge 1</legend>
-        <mat-form-field>
-          <mat-label>Base Score</mat-label>
-          <input formControlName="turns_j1_b"  matInput>
-          <mat-error *ngIf="scoreCompetitorForm.get('turns_j1_b')?.touched">Score is required</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Deductions</mat-label>
-          <input formControlName="turns_j1_d"  matInput>
-          <mat-error *ngIf="scoreCompetitorForm.get('turns_j1_d')?.touched">Deduction is required</mat-error>
-        </mat-form-field>
-      </fieldset>
-      <fieldset>
-        <legend>Judge 2</legend>
-        <mat-form-field>
-          <mat-label>Base Score</mat-label>
-          <input formControlName="turns_j2_b"  matInput>
-          <mat-error *ngIf="scoreCompetitorForm.get('turns_j2_b')?.touched">Score is required</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Deductions</mat-label>
-          <input formControlName="turns_j2_d"  matInput>
-          <mat-error *ngIf="scoreCompetitorForm.get('turns_j2_d')?.touched">Deduction is required</mat-error>
-        </mat-form-field>
-      </fieldset>
-      <fieldset>
-        <legend>Judge 3</legend>
-        <mat-form-field>
-          <mat-label>Base Score</mat-label>
-          <input formControlName="turns_j3_b"  matInput>
-          <mat-error *ngIf="scoreCompetitorForm.get('turns_j3_b')?.touched">Score is required</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Deductions</mat-label>
-          <input formControlName="turns_j3_d"  matInput>
-          <mat-error *ngIf="scoreCompetitorForm.get('turns_j3_d')?.touched">Deduction is required</mat-error>
-        </mat-form-field>
-      </fieldset>
+      <legend>Judge 2</legend>
+      <mat-form-field class="score-input">
+        <mat-label>Base Score</mat-label>
+        <input formControlName="turns_j2_b"  matInput>
+      </mat-form-field>
+      <mat-form-field class="score-input">
+        <mat-label>Deductions</mat-label>
+        <input formControlName="turns_j2_d"  matInput>
+      </mat-form-field>
+    </fieldset>
+    <fieldset>
+      <legend>Judge 3</legend>
+      <mat-form-field class="score-input">
+        <mat-label>Base Score</mat-label>
+        <input formControlName="turns_j3_b"  matInput>
+      </mat-form-field>
+      <mat-form-field class="score-input">
+        <mat-label>Deductions</mat-label>
+        <input formControlName="turns_j3_d"  matInput>
+      </mat-form-field>
     </fieldset>
     <div class="panel-button">
       <button (click)="scoreCompetitor()" title="Send Data" [mat-dialog-close]=""><mat-icon>check</mat-icon></button>
-      <button (click)="deleteCompetitor(this.data.competitorId)" [mat-dialog-close]=""><mat-icon>delete</mat-icon></button>
+      <button (click)="deleteCompetitor()" [mat-dialog-close]=""><mat-icon>delete</mat-icon></button>
     </div>
   </form> 
 </div>

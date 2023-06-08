@@ -1,5 +1,6 @@
 <app-navbar></app-navbar>
 <div class="main-board">
-  <app-aside-navbar></app-aside-navbar>
-  <app-competitors-board></app-competitors-board>
+  <app-aside-navbar ></app-aside-navbar>
+  <app-competitors-board *ngIf="competitionId != 0"></app-competitors-board>
+  <app-welcome-message *ngIf="competitionId == 0 || competitionId == undefined"></app-welcome-message>
 </div>

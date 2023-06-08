@@ -1,5 +1,15 @@
 @import './../../../assets/scss/variables.scss';
 
+header{
+  @apply text-xl mb-4 h-10 flex;
+  background-color: $button-bg-color;
+  color: $button-text-color;
+  h2{
+    @apply  pt-1 tracking-widest font-extrabold ml-5;
+    font-family: $titles-font;
+  }
+}
+
 button{
   background-color: $button-bg-color;
   color: $button-text-color;
@@ -9,21 +19,17 @@ button{
   }
 }
 .close-icon{
-  @apply border-2 rounded-full h-7 sticky;
+  @apply h-10 w-10 sticky;
   left: 325px;
-
 }
 
-.create-category{
+.create-competitor{
   @apply flex flex-col justify-center w-80 mx-auto;
 
+  .bib{
+    @apply w-36;
+  }
   button{
     @apply p-3 m-2 rounded-md;
-  }
-
-  .panel-button{
-    button{
-      @apply px-4;
-    }
   }
 }

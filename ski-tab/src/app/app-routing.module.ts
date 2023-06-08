@@ -8,6 +8,7 @@ import { SettingsCompetitionsComponent } from './components/settings-competition
 import { userGuard } from './guards/user/user.guard';
 import { loginOkGuard } from './guards/loginOk/login-ok.guard';
 import { adminGuard } from './guards/admin/admin.guard';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'settings', component: SettingsComponent, canActivate: [userGuard], children: [
     {path: 'users', component: UsersComponent, canActivate: [adminGuard]},
     {path: 'competitions', component: SettingsCompetitionsComponent, canActivate: [userGuard]},
+    {path: 'chat', component: ChatComponent, canActivate: [userGuard]},
   ]},
 ];
 

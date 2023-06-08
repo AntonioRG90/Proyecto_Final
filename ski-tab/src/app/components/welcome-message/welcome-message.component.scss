@@ -1,0 +1,14 @@
+@import './../../../assets/scss/variables.scss';
+
+.welcome-message{
+  @apply mt-5;
+  h2{
+    @apply text-2xl my-2;
+  }
+  p{
+    a{
+      @apply underline;
+      color: $button-bg-color;
+    }
+  }
+}
