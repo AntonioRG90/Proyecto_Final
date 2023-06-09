@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CompetitorService } from '../../services/competitor/competitor.service';
+import { MessengerService } from 'src/app/services/messenger/messenger.service';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class CreateCompetitorComponent {
   constructor(
     private formBuilder: FormBuilder,
     private competitorService: CompetitorService,
+    private messengerService: MessengerService,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ){}
 
@@ -47,9 +49,14 @@ export class CreateCompetitorComponent {
     competitor_of: 0,
   })
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description Si el formulario es válido se comunica con CompetitorService y crea un nuevo competidor.
+   */
   createCompetitor(){
     if(!this.createCompetitorForm.invalid){
       this.competitorService.createCompetitor(this.data.competitionId, this.data.categoryId, this.createCompetitorForm.value);
+      this.messengerService.showNotification("Competitor Saved!", 2000);
     } 
   }
 }

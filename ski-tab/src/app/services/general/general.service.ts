@@ -11,6 +11,11 @@ export class GeneralService {
   data = new BehaviorSubject(false);
   sharedData = this.data.asObservable();
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description cambia el valor de data dependiendo del parámetro.
+   * @param data 
+   */
   show(data:any){
     this.data.next(data);
   }

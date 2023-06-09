@@ -11,6 +11,12 @@ export class MessengerService {
     private snackBar: MatSnackBar,
   ) { }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description abre el componente CustomSnackbarComponent para notificar ciertas acciones en la app.
+   * @param message 
+   * @param duration 
+   */
   showNotification(message:string, duration:number) {
     this.snackBar.openFromComponent(CustomSnackbarComponent, {
       data:{

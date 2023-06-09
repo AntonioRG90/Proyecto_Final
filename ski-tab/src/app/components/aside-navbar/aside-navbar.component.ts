@@ -50,16 +50,26 @@ export class AsideNavbarComponent {
     this.dialog.closeAll();
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description abre el componente CreateCompetitionComponent
+   * @param competition 
+   */
   openCreateCompetition(competition: any){
     const dialogRef = this.dialog.open(CreateCompetitionComponent,{
       width: '350px',
       data: {competition},
     })
     dialogRef.afterClosed().subscribe(( )=>{
-      
     })
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description abre el componente CreateCategoryComponent
+   * @param competitionId 
+   * @param category
+   */
   openCreateCategory(competitionId:any, category:any){
     const dialogRef = this.dialog.open(CreateCategoryComponent,{
       width: '350px',
@@ -70,6 +80,12 @@ export class AsideNavbarComponent {
     })
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description abre el componente CreateCompetitorComponent
+   * @param competitionId 
+   * @param categoryId 
+   */
   openCreateCompetitor(competitionId:number, categoryId:number){
     const dialogRef = this.dialog.open(CreateCompetitorComponent,{
       width: '350px',
@@ -80,12 +96,21 @@ export class AsideNavbarComponent {
     })
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description pide a CategoryService las categorias dependieno de competitionId
+   * @param competitionId
+   */
   getCategories(competitionId:number){
     this.categoryService.getCategories(competitionId).subscribe((snap) => {
       this.categories = snap;
     } )
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description pide a CompetitionService todas las competiciones disponibles par el usuario logueado 
+   */
   getCompetitions(){
     this.competitionService.getAvailableCompetitions(this.userId).subscribe((snap) => {
       this.competitionsFiltered = snap;
@@ -95,10 +120,22 @@ export class AsideNavbarComponent {
     } )
   }
   
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description comparte con CompetitorService dichos parámetros.
+   * @param competitionId 
+   * @param categoryId 
+   * @param categoryPaceTime 
+   * @param categoryGender 
+   */
   shareDataToBoard(competitionId: number, categoryId: number, categoryPaceTime: number, categoryGender:string){
     this.competitorService.shareDataToBoard([competitionId, categoryId, categoryPaceTime, categoryGender]);
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description trae el valor de una variable de GeneralService
+   */
   getShow(){
    this.generalService.sharedData.subscribe(e =>{
       this.show = e;

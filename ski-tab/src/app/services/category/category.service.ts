@@ -14,6 +14,12 @@ export class CategoryService {
     private idGenerator: IdGeneratorService,
   ) { }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con la base de datos para obtener todas las categorías de la competición pasada como parámetro.
+   * @param competitionId 
+   * @returns un array de categorías.
+   */
   getCategories(competitionId:any){
     const path = 'competitions/'+competitionId+'/categories/';
     return this.db.list(path).snapshotChanges().pipe(
@@ -26,11 +32,25 @@ export class CategoryService {
     );
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con la base de datos para eliminar la categoría pasada por parámetro.
+   * @param competitionId 
+   * @param categoryId 
+   * @returns 
+   */
   deleteCategory(competitionId:number, categoryId: number){
     const path = 'competitions/' + competitionId + '/categories/' + categoryId;
     return this.db.object(path).remove();
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con la base de datos para crear una categoría con los datos de los parámetros.
+   * @param competitionId 
+   * @param data 
+   * @returns 
+   */
   createCategory (competitionId:any, data:any){
     if(data.id == null){
       let id = this.idGenerator.idGenerator();
@@ -51,10 +71,16 @@ export class CategoryService {
     .catch(error => console.log(error));
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description calcula el PaceTime a través de los datos proporcionados por parámetros.
+   * @param gender 
+   * @param slopeDistance 
+   * @returns el valor del PaceTime.
+   */
   calculatePaceTime(gender:string, slopeDistance:any){
     let paceTimeByGender = gender === "men"? 10.30 : 8.80;
     return +(slopeDistance/paceTimeByGender).toFixed(2);
   }
 
- 
 }

@@ -18,6 +18,10 @@ export class NavbarComponent {
     public generalService: GeneralService,
   ){}
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con GeneralService para mostrar el asidenavbar dependiendo del valor que se le pase.
+   */
   toggle(){
     this.hide = !this.hide;
     this.generalService.show(this.hide);

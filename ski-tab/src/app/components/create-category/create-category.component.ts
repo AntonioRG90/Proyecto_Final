@@ -54,12 +54,23 @@ export class CreateCategoryComponent {
     category_of: [this.data.category.category_of]
   })
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description si el formulario es correcto se comunica con CategoryService
+   */
   submitForm(){
     if(!this.createCategory.invalid){
       this.categoryService.createCategory(this.data.competitionId, this.createCategory.value);
+      this.messengerService.showNotification("Saved category!", 2000);
     } 
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description abre una ventana modal, si devuelve true se comuinica con CategoryService y elimina la categoría
+   * @param competitionId 
+   * @param categoryId 
+   */
   deleteForm(competitionId:number, categoryId:number){
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data:{
@@ -75,6 +86,10 @@ export class CreateCategoryComponent {
     
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description crear un archivo .xlsx con una fila definida y ocupa el resto de filas con los resultados de una categoría
+   */
   exportCategory(){
     let workbook = new Workbook();
     let worksheet = workbook.addWorksheet(this.data.category.tag);
@@ -135,8 +150,14 @@ export class CreateCategoryComponent {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
       fs.saveAs(blob, this.data.category.tag);
     })
+    this.messengerService.showNotification("Results successfuly exported!", 2000);
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description toma un archivo .xlsx por input, lo lee y se comunica con CompetitorService para crear por cada fila un competidor.
+   * @param event 
+   */
   importCategory(event:any){
     let file = event.target.files[0];
     let fileReader = new FileReader();
@@ -172,10 +193,15 @@ export class CreateCategoryComponent {
           competitor_of: 0,
         };
         this.competitorService.createCompetitor(this.data.competitionId, this.data.category.id, data);
+        this.messengerService.showNotification("Competitors successfuly imported!", 2000);
       });
     }
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description abre una vetana moda que si devuelve true elimina todos los competidores de una categoría
+   */
   deleteAllUsers(){
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data:{

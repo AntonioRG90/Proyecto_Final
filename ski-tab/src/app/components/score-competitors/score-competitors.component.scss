@@ -19,6 +19,8 @@ fieldset{
 }
 
 .score-competitor{
+  @apply overflow-y-auto;
+
   .data{
     .bib{
       @apply w-14 mr-2;

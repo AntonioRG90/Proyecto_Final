@@ -49,12 +49,23 @@ export class ScoreCompetitorsComponent {
     
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description Si los datos del formulario son válidos se comunica con CompetitorService
+   * @params datos proporcionados desde donde se abre este diálogo.
+   */
   scoreCompetitor(){
     if(!this.scoreCompetitorForm.invalid){
       this.competitorService.updateCompetitor(this.data.competitionId, this.data.categoryId, this.data.paceTime, this.data.gender, this.scoreCompetitorForm.value);
+      this.messengerService.showNotification("Score saved!", 2000);
     } 
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description abre una ventana modal, si devuelve true, se comunica con CompetitorService para eliminar un competidor
+   * @params datos proporcionados desde donde se abre este diálogo.
+   */
   deleteCompetitor(){
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data:{

@@ -68,6 +68,16 @@ export class CompetitorService {
     
    }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description actualiza en la base de datos los parámetros porporcionados por de data de un competidor.
+   * @param competitionId 
+   * @param categoryId 
+   * @param paceTime 
+   * @param gender 
+   * @param data 
+   * @returns petición a la db.
+   */
   updateCompetitor(competitionId:number, categoryId:number, paceTime:number, gender: string, data: any){
     if(data.id == null){
       let id = this.idGenerator.idGenerator()+data.bib;
@@ -104,6 +114,14 @@ export class CompetitorService {
     .catch(error => console.log(error));
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con la base de datos para crear un nuevo competidor con los datos proporcionados por los parámetros.
+   * @param competitionId 
+   * @param categoryId 
+   * @param data 
+   * @returns petición a la db.
+   */
   createCompetitor(competitionId:number, categoryId:number, data:any){
     data.id = this.idGenerator.idGenerator()+data.bib
     const path = 'competitions/'+ competitionId + '/categories/' + categoryId +'/competitors/' + data.id;
@@ -136,10 +154,22 @@ export class CompetitorService {
     .catch(error => console.log(error));
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description cambia el valor de data por el parámetro proporcionado.
+   * @param data
+   */
   shareDataToBoard(data:any){
     this.data.next(data);
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con la base de datos para obtener los competidores según los parametros dados.
+   * @param competitionId 
+   * @param categoryId 
+   * @returns [Competitor].
+   */
   getCompetitors(competitionId:number, categoryId:number){
     const path = 'competitions/'+ competitionId + '/categories/' + categoryId +'/competitors/';
     return this.db.list(path, ref =>{return ref.orderByChild('bib')}).snapshotChanges().pipe(
@@ -152,6 +182,13 @@ export class CompetitorService {
     )
   }
 
+   /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con la base de datos para obtener los competidores según los parametros dados, ordenados por su puntuación total.
+   * @param competitionId 
+   * @param categoryId 
+   * @returns [Competitor].
+   */
   getCompetitorsOrder(competitionId:number, categoryId:number){
     const path = 'competitions/'+ competitionId + '/categories/' + categoryId +'/competitors/';
     return this.db.list(path, ref =>{return ref.orderByChild('run_score')}).snapshotChanges().pipe(
@@ -164,16 +201,38 @@ export class CompetitorService {
     )
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con la base de datos borrar el competidor pasado por parámetro.
+   * @param competitionId 
+   * @param categoryId 
+   * @param competitorId 
+   * @returns petición a la db.
+   */
   deleteCompetitor(competitionId:number, categoryId: number, competitorId:number){
     const path = 'competitions/' + competitionId + '/categories/' + categoryId + '/competitors/' + competitorId;
     return this.db.object(path).remove();
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con la base de datos para eliminar todos los competidores de una categoría determinada.
+   * @param competitionId 
+   * @param categoryId 
+   * @returns petición a la db.
+   */
   deleteAllCompetitors(competitionId:number, categoryId:number){
     const path = 'competitions/' + competitionId + '/categories/' + categoryId + '/competitors/';
     return this.db.object(path).remove();
   }
   
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description calcula los puntos de tiempo segun los parámetros dados.
+   * @param time 
+   * @param paceTime 
+   * @returns float con el resultado.
+   */
   calculateTimePoints(time:number, paceTime:number){
     let t = 48-32*(time/paceTime);
     let t1 = t.toFixed(2);
@@ -181,12 +240,30 @@ export class CompetitorService {
     return parseFloat(t1);
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description calcula los puntos de tiempo segun los parámetros dados.
+   * @param j1b 
+   * @param j1d 
+   * @param j2b 
+   * @param j2d 
+   * @param j3b 
+   * @param j3d 
+   * @returns float con el resultado.
+   */
   calculateTurnsPoints(j1b:number, j1d:number, j2b:number, j2d:number, j3b:number, j3d:number,){
     let points = +((j1b-j1d)+(j2b-j2d)+(j3b-j3d)).toFixed(2);
     this.turnPoints = points > 0? points: 0.1;
     return points > 0? points: 0.1;
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description toma dependiendo del genero los datos almacenados en la variable dd.
+   * @param dd 
+   * @param gender 
+   * @returns contenido de la variable dependiendo del género.
+   */
   getDD(dd:any, gender:string){
     if(gender == 'men'){
       return this.dd[dd][0];
@@ -195,6 +272,18 @@ export class CompetitorService {
     } 
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description calcula los puntos de aire según los parámetros proporcionados.
+   * @param j1j4 
+   * @param j1j5 
+   * @param j1dd 
+   * @param j2j4 
+   * @param j2j5 
+   * @param j2dd 
+   * @param gender 
+   * @returns float del resultado.
+   */
   calculateAirScore(j1j4:number, j1j5:number, j1dd:any, j2j4:number, j2j5:number, j2dd:any, gender:string){
       let j1Points = (((j1j4*1.0)+(j1j5*1.0))/2)*this.getDD(j1dd, gender);
       let j2Points = +(((j2j4*1.0)+(j2j5*1.0))/2)*this.getDD(j2dd, gender);
@@ -203,6 +292,11 @@ export class CompetitorService {
     
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description suma todos los resultados de las funciones de cálculo anteriores.
+   * @returns float con la puntuación total.
+   */
   calculateRunScore(){
     return parseFloat((this.timePoints + this.airPoints + this.turnPoints).toFixed(2));
   }

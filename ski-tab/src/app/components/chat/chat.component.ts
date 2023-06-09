@@ -44,27 +44,43 @@ export class ChatComponent {
     message: [""]
   })
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description Se comunica con UsersService para traer el rol del usuario del parámetro
+   * @param userId 
+   */
   getUserData(userId:string){
     this.usersService.getUser(userId).subscribe( snap => {
-      console.log('in');
       let userFromDB = this.usersService.snapIntoUser(snap);
       this.userRole = userFromDB.role;
     })
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description Si los datos son correctos se comunica con ChatService
+   */
   submitForm(){
     if(this.sendMessageForm.valid){
-      this.chatService.sendMessage(this.userId, this.userName, this.sendMessageForm.value);
+      this.chatService.sendMessage(this.userId, this.userName, this.user.email, this.sendMessageForm.value); 
       this.sendMessageForm.reset();
     }
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con ChatService para traer todos los mensajes
+   */
   getAllMessages(){
     this.chatService.getAllMessages().subscribe( (messages) => {
       this.messages = messages;
     })
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con ChatService para borrar todos los mensajes
+   */
   deleteAllMessages(){
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data:{
@@ -78,5 +94,4 @@ export class ChatComponent {
       }    
     })
   }
-
 }

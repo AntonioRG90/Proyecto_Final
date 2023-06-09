@@ -32,14 +32,31 @@ export class UsersComponent {
     })
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con UsersService para cambiar el status de un usuario.
+   */
   changeStatus(userUid:any, userStatus:boolean){
     this.usersService.changeStatus(userUid, userStatus);
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con UsersService para cambiar el rol de un usuario.
+   * @param userUid 
+   * @param userRole 
+   */
   changeRole(userUid:any, userRole:boolean){
     this.usersService.changeRole(userUid, userRole);
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se abre una ventana moda, si devuelve true, se comunica con UsersService y AuthService para eliminar el 
+   *              usuario cuyos datos son pasados por paráemtro.
+   * @param userUid 
+   * @param userEmail 
+   */
   removeUser(userUid:any, userEmail:any){
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data:{

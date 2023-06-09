@@ -9,7 +9,7 @@
     </h3>
     <div *ngFor="let message of messages" >
       <div [ngClass]="message.userId == userId ? 'user-messages' : 'rest-messages'">
-        <div>
+        <div [title] = 'this.userRole? message.userMail : "" '>
           <p class="name">{{message.userName}}:</p>
           <p class="message">{{message.message}}</p>
         </div>

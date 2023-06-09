@@ -45,13 +45,22 @@ export class CreateCompetitionComponent {
     id: [this.data.competition.id]
   })
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description si los datos introducidos en el formulario son válidos se comunica con CompetitionService para crear una competición.
+   */
   submitForm(){
     if(!this.createCompetition.invalid){
       this.competitionService.createCompetition(this.createCompetition.value);
-      this.messengerService.showNotification("A competition has been created!", 2000);
+      this.messengerService.showNotification("Competition saved!", 2000);
     } 
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description abre una modal, si devuelve true se comunica con CompetitionService para eliminar la competición cuyo id es pasado como parámetro.
+   * @param id 
+   */
   deleteForm(id:number){
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data:{
@@ -66,6 +75,12 @@ export class CreateCompetitionComponent {
     })
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description abre una modal, si devuelve true se comunica con CompetitionService para cambiar el status a inactivo de la competición 
+   * cuyo id es pasado como parámetro.
+   * @param id 
+   */
   finishCompetition(id:number){
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data:{

@@ -25,6 +25,11 @@ export class HomeComponent{
     
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con CompetitorService y se suscribe a un array de datos.
+   * 
+   */
   getData(){
     this.competitorService.sharedData.subscribe( data => {
       this.competitionId = data[0];

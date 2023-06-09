@@ -36,10 +36,21 @@ export class SettingsCompetitionsComponent {
     })
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con CompetitonService para cambiar el status de una competición
+   * @param competitionId 
+   * @param competitionStatus 
+   */
   changeStatus(competitionId:any, competitionStatus:boolean){
     this.competitionService.changeStatus(competitionId, competitionStatus);
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description abre una ventana modal, si devuelve true, borra la competición cuto id es pasado como parámetro.
+   * @param competitionId 
+   */
   deleteCompetition(competitionId:any){
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data:{

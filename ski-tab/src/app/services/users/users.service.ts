@@ -19,33 +19,70 @@ export class UsersService {
 
   ) { }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con la base de datos apra obtener todos los usuarios.
+   * @returns snap con todos los usuarios.
+   */
   getUsers(){
     const path = 'users/'
     return this.db.list(path).snapshotChanges();
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con la base de datos para traer un usuario dado.
+   * @param userUid 
+   * @returns snap con el usuario.
+   */
   getUser(userUid: any){
     const path = 'users/' + userUid;
     return this.db.list(path).snapshotChanges();
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con la base de datos para eliminar el usuario dado.
+   * @param userUid 
+   * @returns petición a la db.
+   */
   removeUser(userUid: any){
     const path = 'users/' + userUid;
     return this.db.object(path).remove();
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con la base de datos para cambiar el estado de un usuario dado.
+   * @param userUid 
+   * @param userStatus 
+   * @returns petición a la db.
+   */
   changeStatus(userUid: any, userStatus: boolean){
     const path = 'users/' + userUid;
     let isActive = {isActive: !userStatus};
     return this.db.object(path).update(isActive);
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con la base de datos para cambiar el rol de un usuario dado.
+   * @param userUid 
+   * @param userRole 
+   * @returns petición a la db.
+   */
   changeRole(userUid: any, userRole: boolean){
     const path = 'users/' + userUid;
     let role = {role: !userRole};
     return this.db.object(path).update(role);
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description convierte un snap a un objeto User.
+   * @param snap 
+   * @returns un objeto User.
+   */
   snapIntoUser(snap: any){
     const user:User ={
       email: snap[0].payload.val(),
@@ -56,6 +93,11 @@ export class UsersService {
     return user;
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description obtenemos el token de usuario de las cookies y ejecutamos una función para traernos el usuario correspondiente a dicho token.
+   * @returns objecto User.
+   */
   tokenIntoUser(){
     let userToken = this.cookieService.get('accessToken');
     let user = this.jwt.decodeToken(userToken);
@@ -66,6 +108,11 @@ export class UsersService {
     )
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description se comunica con la base de datos para crear un usuario nuevo con los datos proporcionados del user de Google.
+   * @param user 
+   */
   insertUserData(user: any){
     const path = 'users/'+user.uid;
     const userToInsert:User = {

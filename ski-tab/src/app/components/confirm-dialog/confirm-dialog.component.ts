@@ -16,10 +16,18 @@ export class ConfirmDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ){}
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description al cerrarse el diálogo duelve true
+   */
   onConfirm(): void {
     this.dialogRef.close(true);
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description al cerrarse el diálogo duelve false
+   */
   onDismiss(): void {
     this.dialogRef.close(false);
   }

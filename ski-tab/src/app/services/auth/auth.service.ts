@@ -23,7 +23,12 @@ export class AuthService {
     private mailService: MailService,
 
   ) { }
-
+  
+   /**
+   * @Author Antonio Ruiz Galvez
+   * @description abre una ventana para registrarse en la app a través de Google, si es usuario es nuevo crea un User es nuestra
+   *              base de datos. Si es falso significa que el usuario ya está registrado.
+   */
   gregister(){
     this.afAuth.signInWithPopup(new GoogleAuthProvider())
     .then( user => {
@@ -41,6 +46,12 @@ export class AuthService {
     })
   }
   
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description abre una ventana de Google para hacer login, si es usuario no está registrado en nuestra base de datos le pide que se registre.
+   *              Si el usuario ya está registrado comprueba en la base de datos que el estado de este sea activo, si lo es accede a la app y se 
+   *              guarda en las cookies su token, sino le informa de que su cuenta está deshabilitada.        
+   */
   glogin(){
     this.afAuth.signInWithPopup(new GoogleAuthProvider())
     .then( user => {
@@ -72,6 +83,12 @@ export class AuthService {
     })
   }
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description envía una petición a una Cloud Function almacenada en Firebase.
+   * @param userEmail 
+   * @returns se comunica con la Cloud Function y elimina al usuario cuyo mail es pasado como parámetro.
+   */
   gdelete(userEmail:any) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -82,6 +99,10 @@ export class AuthService {
     return this.http.post('https://us-central1-skitab-57521.cloudfunctions.net/deleteUser', userEmail, httpOptions);
   } 
 
+  /**
+   * @Author Antonio Ruiz Galvez
+   * @description acaba la sesión de un usuario y elimina su token de las cookies.
+   */
   logout(){
     this.messengerService.showNotification('Logged out!',2000);
     this.router.navigate(['/login']);
